@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SecuritySite</title>
+    <link href="~/css/page.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="background-color: white;">
+
+        <header class="same-line page-header">
+            <p class="same-line">Brabants Security</p>
+            @*<object class="same-line"></object> Logo*@
+            <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
+            <a class="same-line" href="/#residential">Residential</a>
+            <a class="same-line" href="/#commercial">Commercial</a>
+            <a class="same-line" href="/about-us">About Us</a>
+        </header>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+@*    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - SecuritySite - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

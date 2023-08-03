@@ -1,0 +1,264 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="page-body">
+
+    <h1 style="text-align:center; font-size: 50px;">
+        Your next steps into<br/> affordable and trusted security
+    </h1>
+
+</div>
+
+
+<div class="split">
+
+    <div class="left">
+        <img class="full-image" src="https://nailpress.brabants.net/photos/bunny.jpg" />
+
+        <a href="residential" class="same-line button-look">Residential Property</a>
+        <div class="page-divider"></div>
+
+    </div>
+
+    <div class="right">
+        <img class="full-image" src="https://nailpress.brabants.net/photos/bunny.jpg" />
+        <a href="commercial" class="same-line button-look">Commercial Property</a>
+        <div class="page-divider"></div>
+
+    </div>
+
+</div>
+
+
+<div class="page-body">
+
+        <div class="monitoring-rates-section">
+        <h1 class="sub-header" >Residential Monitoring Prices</h1>
+
+        <div class="cards-container">
+
+
+            @*RESIDENTIAL MONITORING CARDS*@
+
+            <div class="black-card" id="residential">
+             <h1 class="deblue">DIY Home<br/> Monitoring</h1>
+                <i class="center fa-solid fa-mobile-screen-button" style="font-size: 55px;"></i>
+                <ul>
+                    <li><span class="orange-line">Remote control app</span></li>
+                    <li>Notification on alarm</li>
+                    <li>No central station dispatch</li>
+                    <li>Smart home compatible</li>
+                </ul>
+                <a href="/cart/diy-r-s">Silver: 20$</a>
+                <a href="/cart/diy-r-g">Gold: 25$</a>
+                <a href="/cart/diy-r-cam-g">Silver w/Cameras: 32$</a>
+            </div>
+
+            <div class="black-card">
+                <h1 class="">Home<br /> Monitoring</h1>
+                <i class="center fa-solid fa-house" style="font-size: 55px;"></i>
+
+                <ul>
+                    <li><span class="redish-line">Central station dispatch</span></li>
+                    <li><span class="orange-line">Remote control app</span>*</li>
+                    <li>Notification on alarm</li>
+                    <li>Smart home compatible</li>
+                </ul>
+                <a href="/cart/pro-r-s">Silver: 25$</a>
+                <a href="/cart/pro-r-g">Gold: 35$</a>
+            </div>
+
+            <div class="black-card">
+                <h1 class="">Monitoring<br /> w/Cameras</h1>
+                <i class="center fa-solid fa-video" style="font-size: 55px;"></i>
+                <ul>
+                    <li><span class="redish-line">Central station dispatch</span></li>
+                    <li>Camera Viewing Capability</li>
+                    <li><span class="orange-line">Remote control app</span></li>
+                    <li>Notification on alarm</li>
+                    <li>Smart home compatible</li>
+                    <li>Video verification compatible</li>
+                    <li>Daily supervision tests</li>
+                    <li>Doorbell compatible</li>
+                </ul>
+                <a href ="/cart/pro-r-cam-s">Silver: 40$</a>
+                <a href ="/cart/pro-r-cam-g">Gold: 45$</a>
+            </div>
+
+        </div>
+
+
+        @*BUSINESS MONITORING CARDS*@
+
+        <h1 class="sub-header"  >Commercial Monitoring Prices</h1>
+        <div class="cards-container">
+
+            <div class="black-card" id="commercial">
+                <h1 class="deblue">DIY Commercial<br /> Monitoring</h1>
+                <i class="center fa-solid fa-mobile-screen-button" style="font-size: 55px;"></i>
+                <ul>
+                    <li><span class="orange-line">Remote control app</span></li>
+                    <li>Notification on alarm</li>
+                    <li>No central station dispatch</li>
+                    <li>Smart home compatible</li>
+                </ul>
+                <a href="/cart/diy-c-s">Silver: 30$</a>
+                <a href="/cart/diy-c-g">Gold: 40$</a>
+                <a href="/cart/diy-c-cam-s">Silver w/Cameras: 32$</a>
+            </div>
+
+
+            <div class="black-card">
+                <h1 class="" >Commercial<br /> Monitoring</h1>
+                <i class="center fa-regular fa-building" style="font-size: 55px;"></i>
+                <ul>
+                    <li><span class="redish-line">Central station dispatch</span></li>
+                    <li><span class="orange-line">Remote control app</span>*</li>
+                    <li>Alarm call verification</li>
+                    <li>Smart home compatible</li>
+                    <li><span class="redish-line">6-hr supervision</span> times</li>
+                </ul>
+                <a href="/cart/pro-c-s">Silver: 45$</a>
+                <a href="/cart/pro-c-g">Gold: 55$</a>
+            </div>
+
+            <div class="black-card">
+                <h1 class="">Monitoring<br /> w/Cameras</h1>
+                <i class="center fa-solid fa-video" style="font-size: 55px;"></i>
+                <ul>
+                    <li><span class="redish-line">Central station dispatch</span></li>
+                    <li>Camera Viewing Capability</li>
+                    <li><span class="orange-line">Remote control app</span>*</li>
+                    <li>Alarm call verification</li>
+                    <li><span class="redish-line">6-hr supervision</span> times</li>
+                    <li>Smart home compatible</li>
+                    <li>Video verification compatible</li>
+                    <li>Daily supervision tests</li>
+                    <li>Doorbell compatible</li>
+                </ul>
+                <a href="/cart/pro-c-cam-s">Silver: 65$</a>
+                <a href="/cart/pro-c-cam-g">Gold: 80$</a>
+            </div>
+
+        </div>
+        </div>
+
+        </div>
+
+
+
+<div class="page-body">
+
+    <div class="section-border-blue">
+
+        <h1 class="display-4 sub-header" style="padding-top: 2%; color: white;">Why Choose Us?</h1>
+
+        <div class="cards-container">
+
+            <div class="card">
+                <i class="center fa-regular fa-clock" style="font-size: 55px;"></i>
+                <h1 class="">24/7 Monitoring</h1>
+                <p>
+                    We use <span class="orange-line">AvantGuard</span> as our monitoring station
+                    which is a <span class="orange-line">5 Diamond</span> rated and <span class="orange-line">UL</span>
+                    certified monitoring station.
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="center fa-solid fa-wallet" style="font-size: 55px;"></i>
+                <h1 class="">Affordable</h1>
+                <p>
+                    Brabants Security Offers <span class="orange-line">low cost monitoring</span>
+                    to all our customers. Our goal is to create little overhead so
+                    that we can offer a very affordable price.
+
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="center fa-solid fa-screwdriver-wrench" style="font-size: 55px;"></i>
+                <h1 class="">Personalized Care</h1>
+                <p>
+                    All of our technicians are trained to provide you with a security system
+                    that <span class="orange-line">fit your personal needs</span>, paying for <span class="orange-line">what you want and need only</span>.
+                </p>
+            </div>
+            <div class="card">
+                <i class="center fa-solid fa-certificate" style="font-size: 55px;"></i>
+                <h1 class="">Alarm Monitoring Certificate</h1>
+                <p>
+                    We provide <span class="orange-line">proof of monitoring for home insurance agencies</span>; for those
+                    looking to reduce their insurance bills or those that require one.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <i class="center fa-solid fa-shield-halved" style="font-size: 55px;"></i>
+                <h1 class="">Take Over Monitoring</h1>
+                <p>
+                    We are able to <span class="orange-line">take over many security systems</span>
+                    to provide you with a more affordable monitoring service.
+                    Contact us to see if we can take over yours.
+                </p>
+            </div>
+
+            <div class="card">
+                <i class="center fa-solid fa-arrows-turn-to-dots" style="font-size: 55px;"></i>
+                <h1 class="">Hybrid Monitoring</h1>
+                <p>
+                    We offer <span class="orange-line">DIY monitoring services</span>
+                    for those who are not seeking a central station.
+                    DIY customers will have reduced costs for our services.<br />
+                    Starting at <span class="redish-line">20$</span> a month.
+                </p>
+            </div>
+        </div>
+
+        <div style=" margin-left: 31.5%; padding-bottom: 2%;">
+            <a href="residential" class="same-line button-look">Residential Property</a>
+            <a href="commercial" class="same-line button-look">Commercial Property</a>
+        </div>
+
+
+        <br />
+    </div>
+
+
+        <h1 class="display-4 sub-header">Can We Take Over Your System?</h1>
+
+        <p class="sub-sub-header">
+            If your security system is included in this list, be happy to know that we can  take over
+            monitoring!
+        </p>
+
+        <ul class="page-list">
+            <li>Vista series panels including: vista 15p, vista 20p, vista 21ip, vista 21iplte, and vista 128bpt</li>
+            <li>Lynx series panels including: L5100, L5200, L5200, L5210, and L7000</li>
+            <li>Alarm.com compatible panels: 2GIG Edge, Qolsys IQ2 and IQ4, GC2 and GC2e, the GC3 and GC3e, and System Enhancement Moduals [SEM]</li>
+            <li>Panels communicating with: M2M, Telguard Communicator, System Enhancement Moduals [SEM], Alula Communicator, DSC Communicator, Alarmnet Communicator, and Napco Communicator</li>
+            <li>Most hardwired secuirty panels</li>
+            <li>Most wireless security panels</li>
+        </ul>
+
+        <h1 class="sub-sub-header">If your panel is not listed here, feel free to send a photo of it to <span class="redish">security@brabants.com</span></h1>
+
+        <h1 class="display-4 sub-header">How Can We Afford These Prices?</h1>
+
+
+    <p class="sub-sub-header">
+        Brabants security is a smaller company with few expenses, out sourced monitoring, and has smaller scope goals.
+    </p>
+    <ul class="page-list">
+        <li>We keep our expenses to a minimum by reducing overhead costs and only ordering parts on a need basis</li>
+        <li>Out sourcing our monitoring allows us to offer high quality monitoring services without having the overhead costs</li>
+        <li>Keeping our goals on a smaller scope allows us to focus on those we monitor, allowing us to avoid unecessary expenses</li>
+        </ul>
+        
+        
+    
+</div>
+

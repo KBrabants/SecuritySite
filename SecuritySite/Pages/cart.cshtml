@@ -1,0 +1,80 @@
+﻿@page "{monitoringCode}"
+@model SecuritySite.Pages.cartModel
+@{
+    Model.priceDirectory["diy-r-s"] = 20;
+    Model.priceDirectory["diy-r-g"] = 25;
+    Model.priceDirectory["diy-r-cam-s"] = 32;
+
+    Model.priceDirectory["pro-r-s"] = 25;
+    Model.priceDirectory["pro-r-s"] = 35;
+
+    Model.priceDirectory["pro-r-s"] = 40;
+    Model.priceDirectory["pro-r-s"] = 45;
+
+    Model.priceDirectory["diy-r-s"] = 30;
+    Model.priceDirectory["diy-r-s"] = 35;
+    Model.priceDirectory["diy-r-s"] = 45;
+
+    Model.priceDirectory["pro-r-s"] = 45;
+    Model.priceDirectory["pro-r-s"] = 55;
+
+    Model.priceDirectory["pro-r-s"] = 65;
+    Model.priceDirectory["pro-r-s"] = 70;
+}
+
+<p>@Model.monitoringCode</p>
+
+<form asp-page="cart" method="post">
+    <input type="text" asp-for="MonitoringInfo.name" />
+
+    <input type="text" asp-for="MonitoringInfo.address" />
+
+    <input type="text" asp-for="MonitoringInfo.zipcode" />
+
+    <input type="text" asp-for="MonitoringInfo.city" />
+
+    <input type="text" asp-for="MonitoringInfo.state" />
+
+</form>
+
+<form asp-page="nailpage">
+    <table>
+        <tr>
+            <td><p>Your Index Nail Width (mm):</p></td>
+            <td><input class="nail-choice" type="number" asp-for="Input.NailItem.CustomerWidth" max="40" min="0" required /></td>
+        </tr>
+        <tr>
+            <td><p>Your Nail Length (mm):</p></td>
+            <td><input class="nail-choice" type="number" asp-for="Input.NailItem.CustomerLength" max="80" min="0" required /></td>
+        </tr>
+        <tr>
+            <td><p>Choose Press-on length:</p></td>
+            <td>
+                <select class="nail-choice" asp-for="Input.NailItem.PressOnLength">
+                    <option value="short">Short</option>
+                    <option value="medium">Medium</option>
+                    <option value="long">Long</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><p>Choose Press-on style:</p></td>
+            <td>
+                <select onchange="changeNail()" class="nail-choice" asp-for="Input.NailItem.PressOnStyle" id="style">
+                    <option value="natural">Natural</option>
+                    <option value="rounded">Rounded</option>
+                    <option value="square">Square</option>
+                    <option value="roundedSquare">Rounded Square</option>
+                    <option value="stilleto">Stilleto</option>
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><p>Quantity (In Sets):</p></td>
+            <td><input class="nail-choice" type="number" asp-for="Input.NailItem.Sets" max="20" min="0" value="1" required /></td>
+            <input type="hidden" asp-for="Input.NailItem.ProductId" value="@Model.PageProduct.ProductId" required />
+        </tr>
+    </table>
+    <button class="general-button" type="submit">Add To Cart</button>
+</form>
