@@ -1,6 +1,11 @@
-﻿body {
+﻿html {
+    scroll-behavior: smooth;
+}
+
+body {
     font-family: 'rubik','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0px;
+    scroll-behavior:smooth;
 }
 
 @font-face {
@@ -243,3 +248,27 @@
     width: 50%;
     float: left;
 }
+
+.checkout-form{
+    margin-left:20%;
+    margin-bottom: 40%;
+}
+
+.checkout-form input {
+    margin-left: 1%;
+}
+
+    .checkout-form button{
+        padding: 10px 20px 10px 20px;
+        font-size: 30px;
+        background-color: #1c5b79;
+        color: white;
+        border: 3px solid black;
+        border-radius: 10px;
+        transition-duration: 0.2s;
+        cursor: pointer;
+    }
+    .checkout-form button:hover {
+        font-size: 35px;
+        background-color: #458b97;
+    }
