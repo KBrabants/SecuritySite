@@ -3,37 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Voltic Security</title>
+    <title>Account Management</title>
     <link href="~/css/page.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/account.css" rel="stylesheet" />
 </head>
 <body>
 
 
 
-        <div class="same-line page-header sticky" >
-            <a style="text-decoration:none;" href="/">
-                <p class="same-line">Voltic Security</p>
-                @*<object class="same-line"></object> Logo*@
-                <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
-            </a>
-            <div class="header-link-spacing">
-                <a class="same-line" href="/#residential">Residential</a>
-                <a class="same-line" href="/#commercial">Commercial</a>
-                <a class="same-line" href="/about-us">About Us</a>
-            @if (true)
-            {
-                <a class="same-line" href="/account/login">Sign Up/Login</a>
-
-            }
-            else
-            {
-                <a class="same-line" href="/account">My Account</a>
-            }
-            </div>
-
-        </div>
+    <div class="side-bar">
+        <ul>
+            <li>Account Overview</li>
+            <li>Manage Locations</li>
+            <li>Request Certificate Of Alarm</li>
+            <li>Recurring Billing</li>
+            <li>Invoices</li>
+            <li>Cancel Service(s)</li>
+        </ul>
+    </div>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -41,10 +30,10 @@
         </main>
     </div>
 
-@*    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - SecuritySite - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+    @*    <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2023 - SecuritySite - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
     </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

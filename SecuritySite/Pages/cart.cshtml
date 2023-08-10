@@ -17,7 +17,7 @@
     <div class="right">
 
         <h1 class="sub-header">@Model.planDirectory[Model.MonitoringCode]</h1>
-         <p class="sub-sub-header" style="text-align:center;">Monthly Charge: $ n@(Model.priceDirectory[Model.MonitoringCode])</p>
+         <p class="sub-sub-header" style="text-align:center;">Monthly Charge: $ @(Model.priceDirectory[Model.MonitoringCode])</p>
 
         <form asp-page="cart" method="post" class="checkout-form">
 
