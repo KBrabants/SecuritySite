@@ -1,5 +1,117 @@
-﻿@page
+﻿@page 
 @model SecuritySite.Pages.Account.LoginModel
 @{
     Layout = "~/Pages/shared/_Layout.cshtml";
 }
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/page.css" rel="stylesheet" />
+<div class="page-body">
+
+
+    <div class="img-container">
+        <img class="full-image" src="/photos/commercial-monitoring.jpg" />
+
+        <div class="relative-center-login">
+
+            <form asp-page="account/login" method="post" class="login-form">
+
+                <p>Customer Login</p>
+
+                <input class="new-line" required type="text" asp-for="Input.emailAddress" placeholder="Email Address" />
+
+                <input class="new-line" required type="password" asp-for="Input.password" placeholder="Password" />
+
+                <label asp-for="Input.rememberSignin" class="same-line">Remember Me: </label>
+                <input asp-for="Input.rememberSignin" class="same-line checkbox" type="checkbox" />
+
+                <button class="new-line" action="submit">Login</button>
+
+                <a class="new-line" href="/account/create">Create Account</a>
+
+                <a class="new-line" href="/account/recoverpassword">Forgot Password</a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    @*        <h1 class="sub-header">@Model.planDirectory[Model.MonitoringCode]</h1>
+    <p class="sub-sub-header" style="text-align:center;">Monthly Charge: $ @(Model.priceDirectory[Model.MonitoringCode])</p>*@
+
+@*            <form asp-page="cart" method="post" class="checkout-form">
+
+                <p class="same-line">First Name: </p> <input required type="text" asp-for="MonitoringInfo.customer.firstName" />
+
+                <br />
+
+                <p class="same-line">Last Name: </p> <input required type="text" asp-for="MonitoringInfo.customer.lastName" />
+
+                <br />
+
+                <p class="same-line">Email: </p> <input required type="text" asp-for="MonitoringInfo.customer.emailAddress" />
+
+                <br />
+
+                <p class="same-line">Phone Number: </p><input required type="text" asp-for="MonitoringInfo.customer.phoneNumber" />
+
+                <br />
+
+                <p class="same-line">Emergency Contact: </p><input required type="text" asp-for="MonitoringInfo.customer.emergencyContact" />
+
+                <br />
+
+                <p class="same-line">Emergency Contact Phone Number: </p><input required type="text" asp-for="MonitoringInfo.customer.emergencyContact" />
+
+                <br />
+
+                <p class="same-line">Address: </p> <input required type="text" asp-for="MonitoringInfo.customer.address" />
+
+                <br />
+
+                <p class="same-line">City: </p><input required type="text" asp-for="MonitoringInfo.customer.city" />
+
+                <br />
+
+                <p class="same-line">County: </p><input required type="text" asp-for="MonitoringInfo.customer.state" />
+
+                <br />
+
+                <p class="same-line">State: </p><input required type="text" asp-for="MonitoringInfo.customer.state" />
+
+                <br />
+
+                <p class="same-line">Zip Code: </p><input required type="text" asp-for="MonitoringInfo.customer.zipcode" />
+
+                <br />
+
+                <p class="same-line">Alarm Password: </p><input required type="text" asp-for="MonitoringInfo.customer.alarmPassword" />
+
+                <br />
+
+                <p class="same-line">Installer Code: </p><input type="text" asp-for="MonitoringInfo.customer.installerCode" />
+
+                <br />
+
+                <p class="same-line">Additional Info: </p><input type="text" asp-for="MonitoringInfo.customer.additionalInfo" />
+
+                <br />
+
+                <p class="same-line">Agree To <a href="/termsofservice">Terms of Service: </a></p><input required type="checkbox" />
+
+                <br />
+
+                <button action="submit">Submit</button>
+
+            </form>*@
+
+
+
+    </div>
+
+
+
+
+

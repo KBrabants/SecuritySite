@@ -1,2 +1,311 @@
 ﻿body {
+    background-color: #eee;
+}
+.burger-button {
+    text-align:center;
+    color:white;
+    font-size: 40px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 0px;
+    cursor:pointer;
+}
+.account-header {
+    background-color: white;
+}
+.side-bar {
+    height: 100%;
+    position: fixed;
+    width: 240px;
+    border-right: 5px solid #458b97;
+    border-top: 5px solid #458b97;
+    background-color: #5aa6b4;
+}
+    .side-bar li {
+        font-size: 20px;
+        padding-top: 45px;
+        font-weight: bold;
+        color: white;
+        width: 95%;
+        cursor: pointer;
+        border-bottom: 2px solid #37d7ab;
+    }
+.side-bar p{
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 60px;
+    padding-left:20px;
+    color: white;
+    font-weight:bold;
+    bottom:0;
+    left:0;
+    position:absolute;
+}
+.side-bar ul{
+    list-style: none;
+    margin-left: 10px;
+    margin-top:0px;
+    padding:0px;
+}
+
+
+    .side-bar a {
+        color: white;
+        text-decoration:none;
+    }
+    .side-bar li:hover {
+        width: 100%;
+        border-bottom: 5px solid white;
+    }
+.quick-nav-bar {
+    padding-left: 2%;
+    border-top: 5px solid #458b97;
+    border-bottom: 5px solid #458b97;
+    border-left: 5px solid #458b97;
+    box-shadow: 3px 6px 10px -5px #808080;
+    padding-bottom: 5px;
+    background-color: #5aa6b4;
+}
+
+.main-container{
+    margin-left: 240px;
+    transition-duration: 0.3s;
+}
+
+.header-description {
+    font-size: 30px;
+    margin-left: 10px;
+    color: #808080;
+    margin-bottom: 0px;
+}
+.quick-nav-title{
+    font-size: 20px;
+    font-weight:bold;
+    color:white;
+    margin: 10px 40px 0px 0px;
+}
+.quick-nav-bar > .default-top-nav{
+    font-size: 20px;
+    margin: 0px;
+    margin-left: 15px;
+    cursor: pointer;
+    color: white;
+    padding: 0px;
+}
+.quick-nav-bar > .default-top-nav:hover {
+    text-decoration:underline;
+    text-decoration-color: #37d7ab;
+}
+    .quick-nav-bar > .default-top-nav:not(:first-child) {
+    margin-left: 30px;
+}
+
+.special-item {
+    font-size: 20px;
+    margin: 0px;
+    background-color: white;
+    border: 4px solid #1c5b79;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #1c5b79;
+    cursor: pointer;
+    padding: 5px;
+    box-shadow: 1px 1px 3px 1px #eeeeee;
+    margin-left: 15px;
+}
+    .special-item:hover {
+        color: #37d7ab;
+    }
+.partial-page-container{
+    margin: 40px 0px 0px 10%;
+    width:80%;
+    background-color: white;
+    border: 2px solid #808080;
+    padding-bottom: 5%
+}
+.overview-grid {
+    display: grid;
+    grid-template-columns: 20% 20%;
+    column-gap: 3%;
+    row-gap: 2%;
+    height: fit-content;
+    padding-bottom: 70px;
+
+}
+    .overview-grid > form {
+        background-color: #f8f8f8;
+        border-radius: 10px;
+    }
+        .overview-grid > div {
+            border-radius: 20px;
+        }
+    .overview-grid p {
+        text-align:left;
+        font-size: 17px;
+        margin-bottom: 0px;
+    }
+    .overview-grid input{
+        font-size:25px;
+        background-color:#eeeeee;
+        border-color: #1c5b79;
+        border-radius: 8px;
+    }
+        .overview-grid a {
+            font-size: 25px;
+            color: black;
+            text-decoration-color: #37d7ab;
+        }
+.invoice-grid {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    font-size: 25px;
+    padding-bottom: 1%;
+}
+    .invoice-grid > div {
+        border: 3px solid #1c5b79;
+        background-color: #b3d0d5;
+        box-shadow: 4px 4px 10px 1px #787878;
+    }
+.invoice-grid > div:nth-child(even){
+    background-color: white;
+}
+    .invoice-grid > div:not(:first-child) {
+        text-align: center;
+        border-left: 1px solid #1c5b79;
+        font-size: 25px;
+    }
+    .invoice-grid > div:first-child{
+        padding-left:10%;
+
+    }
+
+.center-content {
+}
+.invoice-padding {
+    margin-left: 14%;
+    margin-right: 15%;
+    margin-top: 5%;
+    padding-bottom: 6%;
+}
+.invoice-padding h1{
+    border-bottom: 2px solid #eee;
+}
+.left-padding {
+    padding-left: 10%;
+}
+.minor-title{
+    color: white;
+}
+
+.billing-summary{
+    font-size: 25px;
+}
+.left-margin{
+    margin-left: 10%;
+}
+.submit{
+    font-size:20px;
+    background-color:#eeeeee;
+    border-radius: 5px;
+    border-color: #1c5b79;
+    cursor:pointer;
+    transition-duration: 0.2s;
+}
+.submit:hover{
+    background-color: white;
+    color:#37d7ab;
+}
+.view-invoice{
+    padding-top: 10%;
+    font-size: 20px;
+}
+.preview-title{
+    font-size: 20px;
+    font-weight:bold;
+    margin: 0px 0px;
+}
+.preview-text {
+    font-size: 15px;
+    margin: 0px;
+}
+.account-preview {
+    display: grid;
+    grid-template-columns: 10% 20% 20%;
+}
+.account-preview-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: 150px;
+    row-gap: 5%;
+    padding-bottom: 4%;
+}
+    .account-preview > div{
+        padding-top: 40px;
+        border-top: 2px solid #808080;
+    }
+.fa-icon-preview{
+    font-size: 250% !important;
+}
+.account-preview > div:first-child {
+    text-align: center;
+}
+
+.locations-padding{
+    margin-left: 15%;
+    width: 80%;
+}
+.new-location {
+    font-size: 25px;
+    background-color: #eeeeee;
+    color: black;
+    text-decoration:none;
+    font-weight: bold;
+    padding: 1vh 5vw 1vh 5vw;
+    border: 1px solid #808080;
+    border-radius: 6px;
+    transition-duration: 0.2s;
+    box-shadow: 1px 2px 3px 3px #eeeeee;
+}
+    .new-location:hover {
+        color: white;
+        background-color: #808080;
+    }
+.certificate-page{
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-column-gap: 4%;
+    margin-left: 5%;
+    padding-left: 5%;
+    width: 80%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    background-color: white;
+}
+    .certificate-page input {
+        display: block;
+    }
+
+.certificate-request > div {
+    margin-top: 20px;
+}
+
+.certificate-request > input{
+    font-size: 30px;
+}
+.more-info{
+    width: clamp(100px,50%,700px);
+    min-width: 100px;
+    min-height: 20px;
+    max-width: 600px;
+    max-height: 200px;
+    padding: 0px 0px 5% 0%;
+    font-size: 15px;
+}
+.form-group > input{
+    font-size: 15px;
+}
+.form-group > span {
+    color: #ff0000;
 }

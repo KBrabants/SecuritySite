@@ -1,0 +1,51 @@
+﻿@page
+@model SecuritySite.Pages.Account.IndexModel
+@{
+    Layout = "";
+}
+<link href="~/css/account.css" rel="stylesheet" />
+<link href="~/css/site.css" rel="stylesheet" />
+<script src="~/js/site.js"></script>
+<script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@*Partial Container for the the partial pages, doing this to minimze page loads*@
+
+<div class="side-bar">
+    <i onclick="" class="burger-button fa-solid fa-bars"></i>
+
+    <ul>
+        <li onclick="viewPage(0)">Account Overview </li>
+        <li onclick="viewPage(1)">Manage Locations </li>
+        <li><a href="/account/request/certificate">Certificate Of Alarm</a></li>
+        <li onclick="viewPage(3)">Billing</li>
+        <li onclick="viewPage(4)">Invoices</li>
+        <li onclick="viewPage(5)">Settings</li>
+        <li onclick="viewPage(6)">Notifications</li>
+        <li onclick="viewPage(7)">Contact Us</li>
+        <li><a href="/aboutus">About Voltic</a></li>
+        <li><a href="/TermsOfService">Terms Of Service</a></li>
+    </ul>
+    <p class="branding-header">Voltic</p>
+
+</div>
+
+<div class="main-container">
+
+        <div class="quick-nav-bar">
+        <p class="same-line default-top-nav" onclick="viewPage(0)">Account Overview <i class="fa-regular fa-note-sticky"></i></p>
+        <p class="same-line special-item" onclick="viewPage(1)">My Accounts <i class="fa-solid fa-city"></i></p>
+        <p class="same-line default-top-nav" onclick="viewPage(2)">Certificate Of Alarm <i class="fa-solid fa-certificate"></i></p>
+        <p class="same-line default-top-nav" onclick="viewPage(3)">Billing <i class="fa-solid fa-money-bill"></i></p>
+        <p class="same-line default-top-nav" onclick="viewPage(4)">Invoices <i class="fa-regular fa-envelope"></i></p>
+        <p class="same-line default-top-nav" onclick="viewPage(5)">Settings <i class="fa-solid fa-gear"></i></p>
+        </div>
+
+        <div class="partial-page-container">
+
+            <div id="partial-container">
+
+            </div>
+
+        </div>
+
+</div>

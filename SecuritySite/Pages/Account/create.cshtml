@@ -1,0 +1,58 @@
+﻿@page
+@model SecuritySite.Pages.Account.createModel
+@{
+    Layout = "";
+}
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/page.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
+@*       <h1 class="sub-header">@Model.planDirectory[Model.MonitoringCode]</h1>
+    <p class="sub-sub-header" style="text-align:center;">Monthly Charge: $ @(Model.priceDirectory[Model.MonitoringCode])</p>*@
+
+
+    <div class="center-page">
+
+
+
+        <div class="creation-form">
+        <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
+        <p style="padding-left:10%;" class="same-line">Voltic Security</p>
+
+
+        <h3>Sign up for free with your Email</h3>
+
+        <form asp-page="cart" method="post" class="create-account">
+
+            <p class="input-label">Full Name: </p> <input required type="text" asp-for="Input.firstName" placeholder="Full Name" />
+
+
+            <p class="input-label">Password: </p> <input required type="text" asp-for="Input.password" placeholder="Password" />
+
+            <br />
+
+            <p class="input-label">Email: </p> <input required type="email" asp-for="Input.emailAddress" placeholder="Email"/>
+
+            <br />
+
+            <p class="input-label">Phone Number: </p><input required type="tel" asp-for="Input.phoneNumber" placeholder="Phone Number"/>
+
+            <br />
+
+            <p class="input-label same-line">
+                By creating an account, you <br />agree to our <a href="/termsofservice" target="_blank">Terms of Service</a>.
+            </p>
+
+            <br />
+
+            <button style="margin-left:0px;" action="submit">Submit</button>
+
+        </form>
+
+        <p>Already have an account?</p>
+        <a href="/account/login">Login Here</a>
+        </div>
+
+
+
+    </div>
+

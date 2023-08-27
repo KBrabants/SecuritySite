@@ -14,9 +14,9 @@
 
         <div class="same-line page-header sticky" >
             <a style="text-decoration:none;" href="/">
-                <p class="same-line">Voltic Security</p>
-                @*<object class="same-line"></object> Logo*@
-                <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
+            @*<object class="same-line"></object> Logo*@
+            <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 4%;"></i>
+            <p style="margin-left: 0px;" class="same-line">Voltic</p>
             </a>
             <div class="header-link-spacing">
                 <a class="same-line" href="/#residential">Residential</a>
@@ -24,7 +24,7 @@
                 <a class="same-line" href="/about-us">About Us</a>
             @if (true)
             {
-                <a class="same-line" href="/account/login">Sign Up/Login</a>
+                <a class="same-line" href="/account/Login">Sign Up/Login</a>
 
             }
             else
@@ -39,6 +39,36 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
+
+    <footer class="footer-grid">
+        <div>
+            <h1>Help</h1>
+            <a href="/contact">Contact Us</a><br />
+            <a href="/account/appointment">Customer Service</a><br />
+            <a href="/info/maintenance">Maintain My System</a><br />
+            <a href="/info/monitorable">How We Work</a><br />
+            <a href="/account/request/certificate">Certificate of Alarm</a><br />
+        </div>
+        <div>
+            <h1>Information</h1>
+            <a href="/about">About us</a><br />
+            <a href="/termsofservice">Terms Of Service</a><br />
+            <a href="/contact">Contact us</a><br />
+            <a href="/account">Customer Portal</a><br />
+            <a></a>
+        </div>
+        <div>
+            <h1>Want To Start?</h1>
+            <a href="/account/create">Create Your Account</a><br/>
+            <a href="/account">Add Monitored Location</a><br/>
+            <a href="/account/appointment">Schedule a technical appointment</a><br />
+            <a href="/help/maintenance">Maintain Your System</a><br />
+        </div>
+        <br/>
+    </footer>
+    <div class="blue-line">
+        <p>Voltic</p>
     </div>
 
 @*    <footer class="border-top footer text-muted">

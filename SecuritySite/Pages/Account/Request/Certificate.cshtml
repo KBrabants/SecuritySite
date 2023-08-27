@@ -1,0 +1,109 @@
+﻿@page
+@model SecuritySite.Pages.Account.Request.CertificateModel
+@{
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<link href="~/css/account.css" rel="stylesheet" />
+<div class="certificate-page">
+    <div>
+        <h1>Certificate Of Alarm Request</h1>
+        <p>
+            How do I receive a certificate of alarm for my insurance company?<br />
+
+            We try to make it as simple as possible. Please read the requirements, fill out the form, and email <span class="redish">support@@voltic.tech</span> your proof of insurance copy.
+            <h2>Requirements</h2>
+            <ol>
+                <li>Have an existing account with Voltic that is monitored</li>
+                <li>The account must have central station monitoring (the account cannot be a DIY account)</li>
+                <li>There must be tested alarm signals that were sent to the central station within the last 60 days</li>
+                <li>For Fire Certificate, ensure that you have tested all of your fire detecting sensors (such as heat, smoke, etc).</li>
+                <li>Ensure All Information in the form is accurate or you may be denied</li>
+                <li>Email support@@voltic.tech a copy of your Proof of Insurance and complete the form</li>
+            </ol>
+
+    </div>
+    <div>
+        <h2>Request Certificate</h2>
+        <form asp-page="certificate" method="post" class="certificate-request">
+            <label asp-for="Input.Account">Select Location</label>
+            <select  asp-for="Input.Account"> 
+@*                @foreach ()
+                {*@
+                    <option value="AccountName">Account Name</option>
+
+               @* }*@
+            </select>
+            <div class="form-group">
+                <label asp-for="Input.InsuranceAgency"></label>
+                <input asp-for="Input.InsuranceAgency" />
+                <span asp-validation-for="Input.InsuranceAgency"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AgencyPhone"></label>
+                <input asp-for="Input.AgencyPhone" />
+                <span asp-validation-for="Input.AgencyPhone"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="Input.AgentName"></label>
+                 <input  asp-for="Input.AgentName" />
+                <span asp-validation-for="Input.AgentName"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="Input.PolicyNumber"></label>
+                 <input  asp-for="Input.PolicyNumber" />
+                <span asp-validation-for="Input.PolicyNumber"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="Input.AgentEmail"></label>
+                 <input  asp-for="Input.AgentEmail" />
+                <span asp-validation-for="Input.AgentEmail"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="Input.AgencyAddress"></label>
+                 <input  asp-for="Input.AgencyAddress" />
+                <span asp-validation-for="Input.AgencyAddress"></span>
+            </div>
+            <div class="form-group">
+               <label asp-for="Input.AgencySecondAddress"></label>
+               <input  asp-for="Input.AgencySecondAddress" />
+            </div>
+                <div class="form-group">
+                <label asp-for="Input.AgencyCity"></label>
+                <input  asp-for="Input.AgencyCity" />
+                <span asp-validation-for="Input.AgencyCity"></span>
+             </div>
+             <div class="form-group">
+                 <label asp-for="Input.AgencyState"></label>
+                 <input  asp-for="Input.AgencyState" />
+                <span asp-validation-for="Input.AgencyState"></span>
+             </div>
+             <div class="form-group">
+                 <label asp-for="Input.AgencyZipCode"></label>
+                 <input  asp-for="Input.AgencyZipCode" />
+                <span asp-validation-for="Input.AgencyZipCode"></span>
+             </div>
+                            <div class="form-group">
+                 <label asp-for="Input.AgencyCountry"></label>
+                 <input  asp-for="Input.AgencyCountry" />
+                <span asp-validation-for="Input.AgencyCountry"></span>
+            </div>
+
+             <div class="form-group same-line">
+                 <label class="same-line" asp-for="Input.ApplyingForFireCertificate"></label>
+                <input class="same-line" asp-for="Input.ApplyingForFireCertificate" />
+            </div>
+             <div class="form-group">
+                 <label asp-for="Input.MoreInfo"></label><br/>
+                 <textarea class="more-info"  asp-for="Input.MoreInfo"></textarea>
+            </div>
+           <p>Email <span class="redish">support@@voltic.tech</span> a copy of your Proof of Insurance</p>
+            <button type="submit">Submit</button>
+        </form>
+        <p>Please note that the certificate will be sent directly to your insurance agency, you will NOT receive a copy. <br />Certificate will be sent within 3 business.</p>
+
+    </div>
+
+</div>

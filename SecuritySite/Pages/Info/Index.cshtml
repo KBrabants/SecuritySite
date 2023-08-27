@@ -1,0 +1,25 @@
+﻿@page "{subject?}"
+@model SecuritySite.Pages.Info.IndexModel
+@{
+}
+<link href="~/css/page.css" rel="stylesheet" />
+
+
+<div class="small-page-body">
+
+    <partial  name="~/Pages/Info/subjects/_@(Model.subject).cshtml" />
+
+ </div>
+
+<div class="top-container">
+    <p class="sub-header">Learn How To <a class="cyan-line" style="color:white;" href="/account/create">Start Monitoring Today!</a></p>
+</div>
+<div class="page-body" style="margin-bottom: 10%;">
+
+    <ol class="larger-list">
+        <li>Create a <a href="/account/create">Free Account</a> to use our portal</li>
+        <li>Fill out all necessary information to be able to allocate a new location to your account</li>
+        <li>Go To <span class="redish">New Location</span> to add a new location that you would like to start monitoring</li>
+        <li>Create an appointment or call 561-814-0042 to get your system connected to our central station</li>
+    </ol>
+</div>

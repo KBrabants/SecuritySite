@@ -1,0 +1,37 @@
+﻿@{
+}
+
+<div class="locations-padding">
+    <h1 class="same-line">My Locations</h1>
+    <div class="account-preview-grid">
+        @for (int i = 0; i < 2; i++)
+        {
+            <div class="account-preview">
+                <div>
+                    @if (true)
+                    {
+                        <i class="fa-icon-preview fa-solid fa-house"></i>
+                    }
+                    else
+                    {
+                        <i class="fa-icon-preview fa-regular fa-building"></i>
+                    }
+                </div>
+
+                <div>
+                    <p class="preview-title">Account Name</p>
+                    <p class="preview-text">Location Address</p>
+                    <p class="preview-text">Monthly Rate: $X.xx</p>
+                </div>
+
+                <div>
+                    <a href="view/location/@i">View Account</a>
+                    <br />
+                    <a href="edit/location/@i">Edit Plan</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <a href="new/location" class="new-location">New Location</a>
+</div>
