@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Routing;
 using SecuritySite.Data;
 using SecuritySite.Models;
+using System.Security.Policy;
 
 namespace SecuritySite.Services
 {
@@ -38,24 +41,35 @@ namespace SecuritySite.Services
 
             } while (guidMatching > 0);
 
-            var result =  _userManager.CreateAsync(newAccount, password);
-            result.Wait();
+                var result = _userManager.CreateAsync(newAccount, password);
 
-            _context.SaveChanges();
+                if (!result.IsCompleted)
+                {
+                    result.Wait();
+                }
+                if (result.Result.Succeeded)
+                {
+                    //    _emails.EmailVerification();
+                    //    _emails.EmailVoltic("New Account Signed Up");
+                    _context.SaveChanges();
+                    errors = null;
+                    return true;
+                }
+                else
+                {
+                    errors = result.Result.Errors;
+                    return false;
+                    //error logging
+                }
+            
 
+        }
 
-            if(result.Result.Succeeded) {
-                //    _emails.EmailVerification();
-                //    _emails.EmailVoltic("New Account Signed Up");
-                errors = null;
-                return true;
-            }
-            else
-            {
-                errors = result.Result.Errors;
-                return false;
-                //error logging
-            }
+        public async Task<string> GenerateEmailConfirmationToken(ApplicationUser user)
+        {
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            return token;
+
         }
     }
 }

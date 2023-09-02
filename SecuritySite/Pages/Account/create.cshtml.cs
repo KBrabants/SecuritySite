@@ -40,7 +40,10 @@ namespace SecuritySite.Pages.Account
 
             if(error == null)
             {
-                _email.EmailVerification(Input.emailAddress, "Test Link");
+                string token = ac_updates.GenerateEmailConfirmationToken(newUser).Result;
+                _email.EmailVerification(Input.emailAddress, token);
+                _email.EmailVoltic("New Account Created", $"{Input.firstName} created their account");
+             
                 return RedirectToPage("VerifyEmail");
             }
             else
