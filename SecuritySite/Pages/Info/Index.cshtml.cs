@@ -7,7 +7,7 @@ namespace SecuritySite.Pages.Info
     {
 
         [BindProperty(SupportsGet = true)]
-        public string subject { get; set; }
+        public string subject { get; set; } = "";
         public IActionResult OnGet()
         {
             if (subject != null)

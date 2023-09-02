@@ -81,8 +81,8 @@ namespace SecuritySite.Pages.Account
 
     public class Input
     {
-        public string password { get; set; }
-        public string emailAddress { get; set; }
+        public string password { get; set; } = "";
+        public string emailAddress { get; set; } = "";
         public bool rememberSignin { get; set; }
     }
 }

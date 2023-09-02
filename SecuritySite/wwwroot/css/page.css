@@ -406,11 +406,14 @@ body {
             text-decoration: underline;
         }
 .center-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    justify-items: center;
+    align-items:center;
+    margin-top: 2%;
 }
+
 .creation-form {
     text-align: left;
     font-size: 20px;
@@ -420,13 +423,17 @@ body {
     margin-bottom:0px;
     font-size: 20px;
 }
+.form-error {
+    margin: 2px 0px !important;
+    color: #EF6262;
+}
 .creation-form input{
     font-size: 25px;
     padding-left: 10px;
 }
     .creation-form button {
         margin-top: 10%;
-        width: 100%;
+        width: clamp(50px, 100%, 300px);
         background-color: #458b97;
         font-size: 30px;
         cursor: pointer;

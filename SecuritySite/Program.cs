@@ -1,23 +1,34 @@
 using Microsoft.EntityFrameworkCore;
 using SecuritySite.Data;
+using SecuritySite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//{
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!);
+//});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseNpgsql("User Id=postgres;Host=localhost;Port=8081;Database=Voltic;Password=_Gentile12;Pooling=true; Maximum Pool Size=1024;");
+});
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+}).AddEntityFrameworkStores<AppDbContext>();
+
+
+builder.Services.AddTransient<AccountQueryService>();
+builder.Services.AddTransient<AccountUpdateService>();
+builder.Services.AddSingleton<EmailingService>();
 var app = builder.Build();
 
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//{
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")!);
-//});
-
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-//{
-//    options.SignIn.RequireConfirmedAccount = true;
-//}).AddEntityFrameworkStores<AppDbContext>();
 
 
 // Configure the HTTP request pipeline.

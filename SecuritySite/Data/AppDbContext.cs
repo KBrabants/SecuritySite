@@ -9,5 +9,9 @@ namespace SecuritySite.Data
         public AppDbContext (DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<MonitoredAccount> MonitoredAccounts { get; set; }
+        public DbSet<AccountFeature> AccountFeatures { get; set; }
+        public DbSet<CertificateRequest> CertificateRequests { get; set; }
+
     }
+
 }

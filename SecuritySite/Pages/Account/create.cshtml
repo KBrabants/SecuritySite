@@ -12,47 +12,54 @@
 
     <div class="center-page">
 
-
+        <div>
 
         <div class="creation-form">
-        <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
-        <p style="padding-left:10%;" class="same-line">Voltic Security</p>
+            <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 5%;"></i>
+            <p style="padding-left:10%;" class="same-line">Voltic Security</p>
 
 
-        <h3>Sign up for free with your Email</h3>
+            <h3>Sign up for free with your Email</h3>
 
-        <form asp-page="cart" method="post" class="create-account">
+            <form asp-page="cart" method="post" class="create-account">
 
-            <p class="input-label">Full Name: </p> <input required type="text" asp-for="Input.firstName" placeholder="Full Name" />
+                <p class="input-label">Full Name: </p> <input required type="text" asp-for="Input.firstName" placeholder="Full Name" />
 
 
-            <p class="input-label">Password: </p> <input required type="text" asp-for="Input.password" placeholder="Password" />
+                <p class="input-label">Password: </p> <input required type="text" asp-for="Input.password" placeholder="Password" />
 
-            <br />
+                <br />
 
-            <p class="input-label">Email: </p> <input required type="email" asp-for="Input.emailAddress" placeholder="Email"/>
+                <p class="input-label">Email: </p> <input required type="email" asp-for="Input.emailAddress" placeholder="Email" />
 
-            <br />
+                <br />
 
-            <p class="input-label">Phone Number: </p><input required type="tel" asp-for="Input.phoneNumber" placeholder="Phone Number"/>
+                <p class="input-label">Phone Number: </p><input required type="tel" asp-for="Input.phoneNumber" placeholder="Phone Number" />
 
-            <br />
+                <br />
 
-            <p class="input-label same-line">
-                By creating an account, you <br />agree to our <a href="/termsofservice" target="_blank">Terms of Service</a>.
-            </p>
+                <p class="input-label same-line">
+                    By creating an account, you <br />agree to our <a href="/termsofservice" target="_blank">Terms of Service</a>.
+                </p>
 
-            <br />
+                <br />
+                @if (Model.errors != null)
+                {
+                    foreach (var error in Model.errors)
+                    {
+                        <p class="form-error">@(error.Description.Replace("-"," "))</p>
+                    }
+                }
 
-            <button style="margin-left:0px;" action="submit">Submit</button>
+                <button style="margin-left:0px;" action="submit">Submit</button>
 
-        </form>
+            </form>
 
-        <p>Already have an account?</p>
-        <a href="/account/login">Login Here</a>
+            <p>Already have an account?</p>
+            <a href="/account/login">Login Here</a>
         </div>
 
-
+        </div>
 
     </div>
 
