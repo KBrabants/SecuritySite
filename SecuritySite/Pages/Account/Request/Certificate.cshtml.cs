@@ -11,9 +11,7 @@ namespace SecuritySite.Pages.Account.Request
 {
     public class CertificateModel : PageModel
     {
-        public HttpContext _context { get; }
-        public CertificateModel(HttpContext context) {
-         _context = context;
+        public CertificateModel() {
         }
         public void OnGet()
         {

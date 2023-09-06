@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SecuritySite.Data;
@@ -11,9 +12,11 @@ using SecuritySite.Data;
 namespace SecuritySite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230903181304_changes")]
+    partial class changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,20 +173,8 @@ namespace SecuritySite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("County")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -222,20 +213,12 @@ namespace SecuritySite.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -257,15 +240,11 @@ namespace SecuritySite.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("BasePlan")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("Commercial")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -275,10 +254,15 @@ namespace SecuritySite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("MonitoredAccountId")
+                        .HasColumnType("integer");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MonitoredAccountId");
 
                     b.ToTable("AccountFeatures");
                 });
@@ -367,11 +351,8 @@ namespace SecuritySite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Features")
-                        .HasColumnType("text");
-
-                    b.Property<float>("MonthlyCost")
-                        .HasColumnType("real");
+                    b.Property<bool>("accepted")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("additionalInfo")
                         .IsRequired()
@@ -379,32 +360,19 @@ namespace SecuritySite.Migrations
 
                     b.Property<string>("address")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("alarmPassword")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<DateTime>("billed")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("text");
 
                     b.Property<string>("city")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<bool>("commercial")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("completed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("text");
 
                     b.Property<string>("county")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("created")
                         .HasColumnType("timestamp with time zone");
@@ -414,18 +382,15 @@ namespace SecuritySite.Migrations
 
                     b.Property<string>("durressCode")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("emergencyContact")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("emergencyContactPhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("installerCode")
                         .IsRequired()
@@ -436,18 +401,15 @@ namespace SecuritySite.Migrations
 
                     b.Property<string>("locationName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("state")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("zipcode")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.HasKey("MonitoredAccountId");
 
@@ -503,6 +465,18 @@ namespace SecuritySite.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SecuritySite.Models.AccountFeature", b =>
+                {
+                    b.HasOne("SecuritySite.Models.MonitoredAccount", null)
+                        .WithMany("features")
+                        .HasForeignKey("MonitoredAccountId");
+                });
+
+            modelBuilder.Entity("SecuritySite.Models.MonitoredAccount", b =>
+                {
+                    b.Navigation("features");
                 });
 #pragma warning restore 612, 618
         }

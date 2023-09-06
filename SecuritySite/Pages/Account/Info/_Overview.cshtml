@@ -1,6 +1,6 @@
-﻿@{
-}
-<h1 class="left-margin">Hello Username</h1>
+﻿@using SecuritySite.Models;
+@model AccountInfo
+<h1 class="left-margin blue">@Model.Name</h1>
 <form>
 
 <div class="left-padding overview-grid">
@@ -9,38 +9,38 @@
        
         <div>
             <p>Monitored Accounts: </p>
-        <p>X</p> 
+        <p>@Model.Accounts</p> 
         </div>
         <div>
             <p>Email:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.Email" />
         </div>
 
         <div>
             <p>Phone Number: </p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.PhoneNumber" />
         </div>
         <div>
             <p>Billing address:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.Address" />
         </div>
 
         <div>
             <p>City:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.City" />
         </div>
         <div>
             <p>County:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.County" />
         </div>
 
         <div>
             <p>Zipcode:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.ZipCode" />
         </div>
         <div>
             <p>State:</p>
-            <input type="text" value="" />
+            <input type="text" value="@Model.State" />
         </div>
 
 
@@ -53,31 +53,36 @@
     <br/>
 <div class="left-padding billing-summary">
     @*Summarized Billing Info*@
-        <p>Current Monthly Cost: $XX.xx</p>
-        <p>Last Months Bill: $XX.xx</p>
-        <p>Next Billing Date: 12/12/12</p>
+        <p>Current Monthly Cost: $@(Model.MonthlyCost)</p>
+        <p>Last Months Bill: $@(Model.LastBill)</p>
+        <p>Next Billing Date: @Model.BillDate.ToShortDateString()</p>
     </div>
+
 
 <div class="invoice-padding">
     <h1>Latest Invoice</h1>
-    <div class="invoice-grid">
-        @*Latest Invoice*@
-        <div>
-            <p>Bill To: John Doe</p>
-            <p>Accounts: X</p>
-            <p>Billing Address: XXXXst</p>
-        </div>
+    @if (Model.Invoice !=null)
+    {
+        <div class="invoice-grid">
+            @*Latest Invoice*@
+            <div>
+                <p>Bill To: @(Model.Invoice.Name)</p>
+                <p>Accounts: @Model.Invoice.Accounts</p>
+                <p>Billing Address: @Model.Invoice.Address</p>
+            </div>
 
-        <div>
-            <p class="center-content">Charged To:<br /><br /> XXXX71</p>
-        </div>
+            <div>
+                <p class="center-content">Charged To:<br /><br /> XXXX@(Model.Invoice.CardEnding)</p>
+            </div>
 
-        <div>
-            <p class="center-content">Charged:<br /><br /> $XX.xx</p>
-        </div>
+            <div>
+                <p class="center-content">Charged:<br /><br /> $@(Model.Invoice.Price)</p>
+            </div>
 
-    </div>
-    <a class="view-invoice">View Full</a>
+        </div>
+        <a class="view-invoice">View Full</a>
+    }
+
 
 </div>
 

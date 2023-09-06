@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SecuritySite.Data;
@@ -11,9 +12,11 @@ using SecuritySite.Data;
 namespace SecuritySite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906144835_stringFeatures")]
+    partial class stringFeatures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -368,10 +371,8 @@ namespace SecuritySite.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Features")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<float>("MonthlyCost")
-                        .HasColumnType("real");
 
                     b.Property<string>("additionalInfo")
                         .IsRequired()
@@ -396,9 +397,6 @@ namespace SecuritySite.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<bool>("commercial")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("completed")
                         .HasColumnType("boolean");
 
                     b.Property<string>("county")

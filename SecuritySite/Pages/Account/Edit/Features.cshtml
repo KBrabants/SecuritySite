@@ -1,0 +1,44 @@
+﻿@page
+@model SecuritySite.Pages.Account.edit.FeaturesModel
+@{
+}
+<div>
+    <h2>Current Plans</h2>
+    @foreach (var feature in Model.accountFeatures)
+    {
+        <div class="account-addon-card">
+            <p>@feature.FeatureName</p>
+            <p>@feature.Price</p>
+            <form>
+                <input type="hidden" asp-for="RemoveCode" value="@feature.Code" />
+                @if (!feature.BasePlan)
+                {
+                    <button type="submit" asp-page-handler="RemoveFeature">x</button>
+                }
+            </form>
+        </div>
+    }
+
+</div>
+
+<div>
+    <form asp-page="Features">
+        <input type="hidden" asp-for="accountId" value="@Model.accountId" />
+        <input asp-for="test" />
+        @foreach (var feature in Model.availableFeatures)
+        {
+            <div>
+                <p>@feature.FeatureName</p>
+                <p>@feature.Description</p>
+                <p>@feature.Price</p>
+                <select name="selectedFeatures" id="selectedFeatures">
+                    <option value="">No</option>
+                    <option value="@feature.Code">Yes</option>
+                </select>
+            </div>
+        }
+
+        <button type="submit">Review</button>
+    </form>
+
+</div>

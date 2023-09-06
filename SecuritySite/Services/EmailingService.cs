@@ -24,17 +24,17 @@ namespace SecuritySite.Services
 
             return Task.CompletedTask;
         }
-        public void EmailVerification(string emailTo, string verificationLink)
+        public Task EmailVerification(string emailTo, string verificationLink)
         {
             verificationLink = HttpUtility.UrlEncode(verificationLink);
             string subject = "Voltic Email Verification";
             string body = "<h1>Voltic Email Verification</h1> <br/>" +
                 "<p>click the link below to verify your account.</p> <br/>" +
-                $"<a href=\"www.voltic.tech/account/login?token={verificationLink}&handler=Verification&email={emailTo}\">Voltic Verification Link</a>" ;
+                $"<a href=\"www.voltic.tech/account/login?token={verificationLink}&handler=Verification&email={emailTo}\">Voltic Verification <br/> www.voltic.tech/account/login?token={verificationLink}</a>" ;
 
             SendEmailAsync(emailTo, subject, body);
 
-          //  return Task.CompletedTask;
+            return Task.CompletedTask;
         }
         
         public Task EmailCertificateRequest(string emailTo)

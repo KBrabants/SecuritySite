@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SecuritySite.Data;
@@ -11,9 +12,11 @@ using SecuritySite.Data;
 namespace SecuritySite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906162432_NewLocation")]
+    partial class NewLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,9 +372,6 @@ namespace SecuritySite.Migrations
 
                     b.Property<string>("Features")
                         .HasColumnType("text");
-
-                    b.Property<float>("MonthlyCost")
-                        .HasColumnType("real");
 
                     b.Property<string>("additionalInfo")
                         .IsRequired()

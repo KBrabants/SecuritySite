@@ -1,37 +1,47 @@
-﻿@{
-}
+﻿@using SecuritySite.Models;
+@model List<MonitoredAccount>
 
 <div class="locations-padding">
     <h1 class="same-line">My Locations</h1>
-    <div class="account-preview-grid">
-        @for (int i = 0; i < 2; i++)
-        {
-            <div class="account-preview">
-                <div>
-                    @if (true)
-                    {
-                        <i class="fa-icon-preview fa-solid fa-house"></i>
-                    }
-                    else
-                    {
-                        <i class="fa-icon-preview fa-regular fa-building"></i>
-                    }
-                </div>
 
-                <div>
-                    <p class="preview-title">Account Name</p>
-                    <p class="preview-text">Location Address</p>
-                    <p class="preview-text">Monthly Rate: $X.xx</p>
-                </div>
+    @if(Model == null || Model.Count == 0)
+    {
+        <p>You have no accounts, start off by creating your first account.</p>
+    }
+    else
+    {
+        <div class="account-preview-grid">
+            @foreach(MonitoredAccount account in Model)
+            {
+                <div class="account-preview">
+                    <div>
+                        @if (!account.commercial)
+                        {
+                            <i class="fa-icon-preview fa-solid fa-house"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-icon-preview fa-regular fa-building"></i>
+                        }
+                    </div>
 
-                <div>
-                    <a href="view/location/@i">View Account</a>
-                    <br />
-                    <a href="edit/location/@i">Edit Plan</a>
-                </div>
-            </div>
-        }
-    </div>
+                    <div>
+                        <p class="preview-title">@account.locationName</p>
+                        <p class="preview-text">@account.address</p>
+                        <p class="preview-text">Monthly Rate: $@(account.MonthlyCost)</p>
+                    </div>
 
-    <a href="new/location" class="new-location">New Location</a>
+                    <div>
+                        <a href="/Account/edit/location/@account.MonitoredAccountId">View Account</a>
+                        <br />
+                        <a href="/Account/edit/features/@account.MonitoredAccountId">Edit Plan</a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+
+
+    <a href="/account/new/location" class="new-location">New Location</a>
 </div>

@@ -5,7 +5,6 @@ using SecuritySite.Data;
 using SecuritySite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = "User Id=postgres;Host=localhost;Port=8081;Database=Voltic;Password=_Gentile12;Pooling=true; Maximum Pool Size=1024;" ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -17,7 +16,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql("User Id=postgres;Host=localhost;Port=8081;Database=Voltic;Password=_Gentile12;Pooling=true; Maximum Pool Size=1024;");
+    //options.UseNpgsql("User Id=postgres;Host=192.168.1.142;Port=5432;Database=Voltic;Password=_GentileDolphins36912;Pooling=true; Maximum Pool Size=1024;"); Production
+    options.UseNpgsql("User Id=postgres;Host=25.58.113.230;Port=5432;Database=Voltic;Password=_GentileDolphins36912;Pooling=true; Maximum Pool Size=1024;");
 });
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>

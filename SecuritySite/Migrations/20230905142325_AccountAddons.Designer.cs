@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SecuritySite.Data;
@@ -11,9 +12,11 @@ using SecuritySite.Data;
 namespace SecuritySite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230905142325_AccountAddons")]
+    partial class AccountAddons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,6 +252,48 @@ namespace SecuritySite.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("SecuritySite.Models.AccountAddon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BasePlan")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Commercial")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FeatureName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("MonitoredAccountId")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MonitoredAccountId");
+
+                    b.ToTable("AccountAddons");
+                });
+
             modelBuilder.Entity("SecuritySite.Models.AccountFeature", b =>
                 {
                     b.Property<int>("Id")
@@ -367,12 +412,6 @@ namespace SecuritySite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Features")
-                        .HasColumnType("text");
-
-                    b.Property<float>("MonthlyCost")
-                        .HasColumnType("real");
-
                     b.Property<string>("additionalInfo")
                         .IsRequired()
                         .HasColumnType("text");
@@ -396,9 +435,6 @@ namespace SecuritySite.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<bool>("commercial")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("completed")
                         .HasColumnType("boolean");
 
                     b.Property<string>("county")
@@ -503,6 +539,18 @@ namespace SecuritySite.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SecuritySite.Models.AccountAddon", b =>
+                {
+                    b.HasOne("SecuritySite.Models.MonitoredAccount", null)
+                        .WithMany("addons")
+                        .HasForeignKey("MonitoredAccountId");
+                });
+
+            modelBuilder.Entity("SecuritySite.Models.MonitoredAccount", b =>
+                {
+                    b.Navigation("addons");
                 });
 #pragma warning restore 612, 618
         }

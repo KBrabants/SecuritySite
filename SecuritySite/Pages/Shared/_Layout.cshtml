@@ -22,14 +22,13 @@
                 <a class="same-line" href="/#residential">Residential</a>
                 <a class="same-line" href="/#commercial">Commercial</a>
                 <a class="same-line" href="/about-us">About Us</a>
-            @if (true)
+            @if (User.Identity.IsAuthenticated)
             {
-                <a class="same-line" href="/account/Login">Sign Up/Login</a>
-
+                <a class="same-line" href="/account">My Account</a>
             }
             else
             {
-                <a class="same-line" href="/account">My Account</a>
+                <a class="same-line" href="/account/Login">Sign Up/Login</a>
             }
             </div>
 

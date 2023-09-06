@@ -1,0 +1,81 @@
+﻿@page
+@model SecuritySite.Pages.Account.New.ReviewModel
+@{
+}
+
+
+<form asp-page="Review" method="post" class="new-location-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="accountId" value="@Model.LocationInfo.MonitoredAccountId" />
+
+    <label asp-for="LocationInfo.locationName">Location Name:</label>
+    <input asp-for="LocationInfo.locationName" />
+    <span asp-validation-for="LocationInfo.locationName"></span>
+    <br />
+
+    <label asp-for="LocationInfo.alarmPassword">Alarm Password:</label>
+    <input asp-for="LocationInfo.alarmPassword" />
+    <span asp-validation-for="LocationInfo.alarmPassword"></span>
+    <br />
+
+    <label asp-for="LocationInfo.durressCode">Durress Password:</label>
+    <input asp-for="LocationInfo.durressCode" />
+    <span asp-validation-for="LocationInfo.durressCode"></span>
+    <br />
+
+    <label asp-for="LocationInfo.emergencyContact">Emergency Contact:</label>
+    <input asp-for="LocationInfo.emergencyContact" />
+    <span asp-validation-for="LocationInfo.emergencyContact"></span>
+    <br />
+
+    <label asp-for="LocationInfo.emergencyContactPhoneNumber">Emergency Contact Phone Number:</label>
+    <input asp-for="LocationInfo.emergencyContactPhoneNumber" />
+    <span asp-validation-for="LocationInfo.emergencyContactPhoneNumber"></span>
+    <br />
+
+    <label asp-for="LocationInfo.address">Location Address:</label>
+    <input asp-for="LocationInfo.address" />
+    <span asp-validation-for="LocationInfo.address"></span>
+    <br />
+
+    <label asp-for="LocationInfo.city">City:</label>
+    <input asp-for="LocationInfo.city" />
+    <span asp-validation-for="LocationInfo.city"></span>
+    <br />
+
+    <label asp-for="LocationInfo.county">County:</label>
+    <input asp-for="LocationInfo.county" />
+    <span asp-validation-for="LocationInfo.county"></span>
+    <br />
+
+    <label asp-for="LocationInfo.state">State:</label>
+    <input asp-for="LocationInfo.state" />
+    <span asp-validation-for="LocationInfo.state"></span>
+    <br />
+
+    <label asp-for="LocationInfo.zipcode">Zip/Postal Code</label>
+    <input asp-for="LocationInfo.zipcode" />
+    <span asp-validation-for="LocationInfo.zipcode"></span>
+    <br />
+
+    <label asp-for="LocationInfo.installerCode">Installer Code</label>
+    <input asp-for="LocationInfo.installerCode" />
+    <br />
+    <label asp-for="LocationInfo.additionalInfo">Additional Info</label>
+    <textarea asp-for="LocationInfo.additionalInfo"></textarea>
+    <br />
+
+    <button type="submit">Confirm</button>
+</form>
+
+<div>
+    <h2>Plans:</h2>
+    @foreach (var feature in Model.accountFeatures)
+    {
+        <div class="account-addon-card">
+            <p>@feature.FeatureName</p>
+            <p>@feature.Price</p>
+        </div>
+    }
+    <p>@(Model._query.GetMonitoredAccountPrice(Model.LocationInfo)) Monthly</p>
+</div>

@@ -532,3 +532,13 @@ body {
             margin: 0px 0px 0px 2%;
             font-size: 25px;
         }
+.new-location-form label{
+    display:block;
+}
+
+.radio-grid{
+    display:grid;
+    grid-template-columns: clamp(100px,10%,300px) clamp(100px,30%, 700px) 5%;
+    grid-column-gap: 3%;
+    grid-row-gap: 50px;
+}
