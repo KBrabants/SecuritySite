@@ -2,93 +2,49 @@
 @using SecuritySite.Models;
 @model SecuritySite.Pages.Account.IndexModel
 @{
-    Layout = "";
+    Layout = "_AccountLayout";
 }
 <link href="~/css/account.css" rel="stylesheet" />
 <link href="~/css/site.css" rel="stylesheet" />
 <script src="~/js/site.js"></script>
 <script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, minimum-scale=1">
 @*Partial Container for the the partial pages, doing this to minimze page loads*@
 
-<div class="side-bar">
-    <i onclick="" class="burger-button fa-solid fa-bars"></i>
+<div class="side-bar-hidden" id="side-bar">
+    <i onclick="SideBar()" class="burger-button-black fa-solid fa-bars" id="burger-button"></i>
 
     <ul>
-        <li onclick="viewPage(0)">Account Overview </li>
-        <li onclick="viewPage(1)">Manage Locations </li>
+        <li onclick="viewPage(0); SideBar();">Account Overview </li>
+        <li onclick="viewPage(1); SideBar();">Manage Locations </li>
         <li><a href="/account/request/certificate">Certificate Of Alarm</a></li>
-        <li onclick="viewPage(3)">Billing</li>
+@*         <li onclick="viewPage(3)">Billing</li>
         <li onclick="viewPage(4)">Invoices</li>
         <li onclick="viewPage(5)">Settings</li>
-        <li onclick="viewPage(6)">Notifications</li>
-        <li onclick="viewPage(7)">Contact Us</li>
-        <li><a href="/aboutus">About Voltic</a></li>
-        <li><a href="/TermsOfService">Terms Of Service</a></li>
+        <li onclick="viewPage(6)">Notifications</li> *@
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="/about">About Voltic</a></li>
+        <li><a href="/termsofservice">Terms Of Service</a></li>
     </ul>
-    <p class="branding-header">Voltic</p>
+    <a href="/"><p>Voltic</p></a>
 
 </div>
 
-<div class="main-container">
+<div class="main-container-full" id="main-container">
 
         <div class="quick-nav-bar">
         <p class="same-line default-top-nav" onclick="viewPage(0)">Account Overview <i class="fa-regular fa-note-sticky"></i></p>
         <p class="same-line special-item" onclick="viewPage(1)">My Accounts <i class="fa-solid fa-city"></i></p>
-        <p class="same-line default-top-nav" onclick="viewPage(2)">Certificate Of Alarm <i class="fa-solid fa-certificate"></i></p>
-        <p class="same-line default-top-nav" onclick="viewPage(3)">Billing <i class="fa-solid fa-money-bill"></i></p>
-        <p class="same-line default-top-nav" onclick="viewPage(4)">Invoices <i class="fa-regular fa-envelope"></i></p>
-        <p class="same-line default-top-nav" onclick="viewPage(5)">Settings <i class="fa-solid fa-gear"></i></p>
+        <a class="same-line default-top-nav" href="/account/request/certificate">Certificate Of Alarm <i class="fa-solid fa-certificate"></i></a>
+        <a class="same-line default-top-nav" href="/about">About Voltic</a>
+        <a class="same-line default-top-nav" href="/termsofservice">Terms Of Service</a>
         </div>
 
         <div class="partial-page-container">
-
             <div id="partial-container">
-            <div class="locations-padding">
-                <h1 class="same-line">My Locations</h1>
+                <partial name="@Model.PageView" model="Model.pageModel" />
+            </div>            
 
-                @if (Model == null || Model.MonitoredAccounts.Count == 0)
-                {
-                    <p>You have no accounts, start off by creating your first account.</p>
-                }
-                else
-                {
-                    <div class="account-preview-grid">
-                        @foreach (MonitoredAccount account in Model.MonitoredAccounts)
-                        {
-                            <div class="account-preview">
-                                <div>
-                                    @if (!account.commercial)
-                                    {
-                                        <i class="fa-icon-preview fa-solid fa-house"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa-icon-preview fa-regular fa-building"></i>
-                                    }
-                                </div>
-
-                                <div>
-                                    <p class="preview-title">@account.locationName</p>
-                                    <p class="preview-text">@account.address</p>
-                                    <p class="preview-text">Monthly Rate: $@(account.MonthlyCost)</p>
-                                </div>
-
-                                <div>
-                                    <a href="/Account/edit/location/@account.MonitoredAccountId">View Account</a>
-                                    <br />
-                                    <a href="/Account/edit/features/@account.MonitoredAccountId">Edit Plan</a>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-
-
-
-                <a href="/account/new/location" class="new-location">New Location</a>
-            </div>
-            </div>
 
         </div>
 

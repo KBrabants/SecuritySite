@@ -1,44 +1,91 @@
-﻿@page
+﻿@page "{accountId}"
 @model SecuritySite.Pages.Account.edit.FeaturesModel
 @{
 }
-<div>
-    <h2>Current Plans</h2>
-    @foreach (var feature in Model.accountFeatures)
-    {
-        <div class="account-addon-card">
-            <p>@feature.FeatureName</p>
-            <p>@feature.Price</p>
-            <form>
-                <input type="hidden" asp-for="RemoveCode" value="@feature.Code" />
-                @if (!feature.BasePlan)
-                {
-                    <button type="submit" asp-page-handler="RemoveFeature">x</button>
-                }
-            </form>
-        </div>
-    }
+<div class="new-features-inputs">
 
-</div>
+    <div class="features-container">
+        <h2>Current Plans</h2>
+        <p>Listed below is your current base plan followed by additional account features included.</p>
+        <br/>
+        @foreach (var feature in Model.accountFeatures)
+        {
+            <div class="account-addon-card">
+                <p>@feature.FeatureName</p>
+                <p>@feature.Price</p>
+                <p>@feature.Description</p>
+                <form asp-page="Features">
+                    <input type="hidden" asp-for="RemoveCode" value="@feature.Code" />
+                    <input type="hidden" asp-for="accountId" value="@Model.accountId" />
+                    @if (!feature.BasePlan)
+                    {
+                        <button type="submit" asp-page-handler="RemoveFeature">Remove</button>
+                    }
+                </form>
+            </div>
+        }
 
-<div>
+    </div>
+
+
+
+
+
+
+<div class="extra-features-container">
+    <h1>Additional Features</h1>
+        <p>Listed below are features which may be enabled to your plan.</p>
+        <br />
     <form asp-page="Features">
         <input type="hidden" asp-for="accountId" value="@Model.accountId" />
-        <input asp-for="test" />
         @foreach (var feature in Model.availableFeatures)
         {
-            <div>
+                <div class="addon-features">
                 <p>@feature.FeatureName</p>
                 <p>@feature.Description</p>
                 <p>@feature.Price</p>
-                <select name="selectedFeatures" id="selectedFeatures">
+                <select name="addFeatures" id="selectedFeatures">
                     <option value="">No</option>
-                    <option value="@feature.Code">Yes</option>
+                    <option value="@feature.Code">Add</option>
                 </select>
             </div>
         }
 
-        <button type="submit">Review</button>
+        <button type="submit" asp-page-handler="AddFeature">Add Features</button>
     </form>
 
+</div>
+
+<div>
+    <h1>Change Base Plan</h1>
+        <p>Changing your base plan will remove all added features when switching between a residential location and a commercial location, please be sure to add the features that you would like after changing your plan.</p>
+        <br />
+    <form asp-page="Features">
+        <input type="hidden" asp-for="accountId" value="@Model.accountId" />
+
+        <div class="radio-grid">
+            @foreach (var plan in Model.basePlans)
+            {
+                    if (Model.account.Features.Contains(plan.Code))
+                        continue;
+
+                <div>
+                    <p class="same-line">@plan.FeatureName</p>
+                    @(Html.RadioButtonFor(model => model.addFeatures, plan.Code))
+                </div>
+
+                <div>
+                    @plan.Description
+                </div>
+
+                <div>
+                    $@(plan.Price) Monthly
+                </div>
+
+            }
+        </div>
+        <button type="submit" asp-page-handler="AddFeature">Update Plan</button>
+    </form>
+
+</div>
 </div>

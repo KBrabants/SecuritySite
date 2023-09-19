@@ -15,6 +15,7 @@
             {
                 <div class="account-preview">
                     <div>
+                        <br/>
                         @if (!account.commercial)
                         {
                             <i class="fa-icon-preview fa-solid fa-house"></i>
@@ -28,13 +29,35 @@
                     <div>
                         <p class="preview-title">@account.locationName</p>
                         <p class="preview-text">@account.address</p>
+                        @if (account.accepted)
+                        {
+                            <p class="preview-text blue" style="font-weight:bold">Account: Approved</p>
+                        }
+                        else
+                        {
+                            <p class="preview-text redish">Account: Pending Approval</p>
+                        }
+                        @if (account.completed)
+                        {
+                            <p class="preview-text blue" style="font-weight:bold">Account Completed</p>
+                        }
+                        else
+                        {
+                            <p class="preview-text redish">Needs Review</p>
+                        }
+                        @if (account.deleted)
+                        {
+                            <p class ="preview-text redish">Delete Requested</p>
+                        }
                         <p class="preview-text">Monthly Rate: $@(account.MonthlyCost)</p>
                     </div>
 
                     <div>
                         <a href="/Account/edit/location/@account.MonitoredAccountId">View Account</a>
                         <br />
+                        <br/>
                         <a href="/Account/edit/features/@account.MonitoredAccountId">Edit Plan</a>
+
                     </div>
                 </div>
             }

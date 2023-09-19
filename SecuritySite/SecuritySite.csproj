@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Info\Subjects\TermsOfService.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
@@ -23,6 +27,18 @@
   <ItemGroup>
     <Folder Include="Pages\Test\" />
     <Folder Include="wwwroot\Email\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Info\Subjects\TermsOfService.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Info\Subjects\TermsOfService.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Info\TermsOfService.cshtml" />
   </ItemGroup>
 
 </Project>

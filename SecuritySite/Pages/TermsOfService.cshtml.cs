@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SecuritySite.Pages.Account.Request
+namespace SecuritySite.Pages
 {
-    public class processingModel : PageModel
+    [Authorize]
+    public class TermsOfServiceModel : PageModel
     {
-        [Authorize]
         public void OnGet()
         {
         }

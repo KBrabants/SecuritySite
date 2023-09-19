@@ -6,15 +6,28 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using SecuritySite.Models;
+using SecuritySite.Services;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SecuritySite.Pages.Account.Request
 {
+    [Authorize]
     public class CertificateModel : PageModel
     {
-        public CertificateModel() {
+        public AccountQueryService _query { get;}
+        public AccountUpdateService _update { get; }
+        public EmailingService _email { get; }
+        public CertificateModel(AccountQueryService query, AccountUpdateService update, EmailingService email) {
+            _query = query;
+            _update = update;
+            _email = email;
         }
+
+        public List<MonitoredAccount> accounts { get; set; }
         public void OnGet()
         {
+            accounts = _query.GetMonitoredAccounts(_query.GetAccountGuid(User.FindFirstValue(ClaimTypes.NameIdentifier))).ToList();
         }
 
         [BindProperty]
@@ -27,7 +40,7 @@ namespace SecuritySite.Pages.Account.Request
              return Page();
             }
             CertificateRequest request = new CertificateRequest {
-               // Account = GetUserAccount(Input.Account, ),
+                AccountId = Input.AccountId,
                 InsuranceAgency = Input.InsuranceAgency,
                 AgentName = Input.AgentName,
                 PolicyNumber = Input.PolicyNumber,
@@ -42,7 +55,9 @@ namespace SecuritySite.Pages.Account.Request
                 ApplyingForFireCertificate = Input.ApplyingForFireCertificate,
                 AgentEmail = Input.AgentEmail,
             };
-            //Save info to database :)
+
+            _update.new_CertificateRequest(request, _query.GetMonitoredAccount(request.AccountId));
+            _email.EmailCertificateRequest(_query.GetAccountInfo(User.FindFirstValue(ClaimTypes.NameIdentifier)).Email);
             return RedirectToPage("processing");
         }
     }
@@ -51,7 +66,7 @@ namespace SecuritySite.Pages.Account.Request
     {
         [Required]
         [Display(Name = "Select Location")]
-        public string Account { get; set; } = "";
+        public int AccountId { get; set; }
 
         [Required]
         [StringLength(200, MinimumLength = 1, ErrorMessage = "Insurance Agency is Required")]

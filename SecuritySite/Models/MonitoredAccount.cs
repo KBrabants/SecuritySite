@@ -29,6 +29,7 @@ namespace SecuritySite.Models
         [StringLength(100, ErrorMessage = "Emergency Contact Needed")]
         [Display(Description = "Emergency Contact:")]
         public string emergencyContact { get; set; } = "";
+
         [Required]
         [StringLength(100, ErrorMessage = "Emergency Contact Needed")]
         [Display(Description = "Emergency Contact Name:")]
@@ -68,7 +69,7 @@ namespace SecuritySite.Models
         public string installerCode { get; set; } = "";
         public bool completed { get; set; }
         public bool deleted { get; set; }
-        private bool accepted { get; set; }
+        public bool accepted { get; set; }
 
         [Display(Description = "Is Commercial:")]
         public bool commercial { get; set; }

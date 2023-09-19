@@ -1,94 +1,121 @@
 ﻿@page
 @model SecuritySite.Pages.New.LocationModel
 @{
+    ViewData["Title"] = "- New Location";
 }
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<link href="~/css/page.css" rel="stylesheet" />
 
-<h1>Test</h1>
+
+
+<div class="new-location-inputs">
 
 <form asp-page="Location" method="post" class="new-location-form">
+
+
+        <div class="form-inputs">
+            <h1>Create a New Location</h1>
+
+            <label asp-for="LocationInfo.locationName"></label>
+            <input asp-for="LocationInfo.locationName" />
+             <br />
+            <span asp-validation-for="LocationInfo.locationName"></span>
+            <br />
+
+            <label asp-for="LocationInfo.alarmPassword"></label>
+            <input asp-for="LocationInfo.alarmPassword" />
+            <br />
+            <span asp-validation-for="LocationInfo.alarmPassword"></span>
+            <br />
+
+            <label asp-for="LocationInfo.durressCode"></label>
+            <input asp-for="LocationInfo.durressCode" />
+            <br />
+            <span asp-validation-for="LocationInfo.durressCode"></span>
+            <br />
+
+            <label asp-for="LocationInfo.emergencyContact"></label>
+            <input asp-for="LocationInfo.emergencyContact" />
+            <br />
+            <span asp-validation-for="LocationInfo.emergencyContact"></span>
+            <br />
+
+            <label asp-for="LocationInfo.emergencyContactPhoneNumber"></label>
+            <input asp-for="LocationInfo.emergencyContactPhoneNumber" />
+            <br />
+            <span asp-validation-for="LocationInfo.emergencyContactPhoneNumber"></span>
+            <br />
+
+            <label asp-for="LocationInfo.address"></label>
+            <input asp-for="LocationInfo.address" />
+            <br />
+            <span asp-validation-for="LocationInfo.address"></span>
+            <br />
+
+            <label asp-for="LocationInfo.city"></label>
+            <input asp-for="LocationInfo.city" />
+            <br />
+            <span asp-validation-for="LocationInfo.city"></span>
+            <br />
+
+            <label asp-for="LocationInfo.county"></label>
+            <input asp-for="LocationInfo.county" />
+            <br />
+            <span asp-validation-for="LocationInfo.county"></span>
+            <br />
+
+            <label asp-for="LocationInfo.state"></label>
+            <input asp-for="LocationInfo.state" />
+            <br />
+            <span asp-validation-for="LocationInfo.state"></span>
+            <br />
+
+            <label asp-for="LocationInfo.zipcode"></label>
+            <input asp-for="LocationInfo.zipcode" />
+            <br />
+            <span asp-validation-for="LocationInfo.zipcode"></span>
+            <br />
+
+            <label asp-for="LocationInfo.installerCode"></label>
+            <input asp-for="LocationInfo.installerCode" />
+            <br />
+            <label asp-for="LocationInfo.additionalInfo"></label>
+            <textarea asp-for="LocationInfo.additionalInfo"></textarea>
+            <br /> 
+
+
+    </div>
     @Html.AntiForgeryToken()
-    <label asp-for="LocationInfo.locationName">Location Name:</label>
-    <input asp-for="LocationInfo.locationName" />
-    <span asp-validation-for="LocationInfo.locationName"></span>
-    <br />
-
-    <label asp-for="LocationInfo.alarmPassword">Alarm Password:</label>
-    <input asp-for="LocationInfo.alarmPassword" />
-    <span asp-validation-for="LocationInfo.alarmPassword"></span>
-    <br />
-
-    <label asp-for="LocationInfo.durressCode">Durress Password:</label>
-    <input asp-for="LocationInfo.durressCode" />
-    <span asp-validation-for="LocationInfo.durressCode"></span>
-    <br />
-
-    <label asp-for="LocationInfo.emergencyContact">Emergency Contact:</label>
-    <input asp-for="LocationInfo.emergencyContact" />
-    <span asp-validation-for="LocationInfo.emergencyContact"></span>
-    <br />
-
-    <label asp-for="LocationInfo.emergencyContactPhoneNumber">Emergency Contact Phone Number:</label>
-    <input asp-for="LocationInfo.emergencyContactPhoneNumber" />
-    <span asp-validation-for="LocationInfo.emergencyContactPhoneNumber"></span>
-    <br />
-
-    <label asp-for="LocationInfo.address">Location Address:</label>
-    <input asp-for="LocationInfo.address" />
-    <span asp-validation-for="LocationInfo.address"></span>
-    <br />
-
-    <label asp-for="LocationInfo.city">City:</label>
-    <input asp-for="LocationInfo.city" />
-    <span asp-validation-for="LocationInfo.city"></span>
-    <br />
-
-    <label asp-for="LocationInfo.county">County:</label>
-    <input asp-for="LocationInfo.county" />
-    <span asp-validation-for="LocationInfo.county"></span>
-    <br />
-
-    <label asp-for="LocationInfo.state">State:</label>
-    <input asp-for="LocationInfo.state" />
-    <span asp-validation-for="LocationInfo.state"></span>
-    <br />
-
-    <label asp-for="LocationInfo.zipcode">Zip/Postal Code</label>
-    <input asp-for="LocationInfo.zipcode" />
-    <span asp-validation-for="LocationInfo.zipcode"></span>
-    <br />
-
-    <label asp-for="LocationInfo.installerCode">Installer Code</label>
-    <input asp-for="LocationInfo.installerCode" />
-    <br />
-    <label asp-for="LocationInfo.additionalInfo">Additional Info</label>
-    <textarea asp-for="LocationInfo.additionalInfo"></textarea>
-    <br />
-
+    <div class="new-location-radio">
+        <h1>Select Base Plan</h1>
         <div class="radio-grid">
             @foreach (var plan in Model.Features)
             {
-              
 
-                 <div>
+
+                <div>
                     <p class="same-line">@plan.FeatureName</p>
-                        @(Html.RadioButtonFor(model => model.BasePlan, plan.Code))
-                 </div>
+                    @(Html.RadioButtonFor(model => model.BasePlan, plan.Code))
+                </div>
 
-                 <div>
-                        @plan.Description
-                 </div>
+                <div>
+                    <br/>
+                    @plan.Description
+                </div>
 
-                 <div>
+                <div>
+                        <br />
                     $@(plan.Price) Monthly
-                 </div>
-              
+                </div>
+
             }
         </div>
-
-
-
-
+    </div>
+        <span asp-validation-for="BasePlan"></span>
+    <br/>
     <button type="submit">Add Features</button>
 </form>
+
+</div>

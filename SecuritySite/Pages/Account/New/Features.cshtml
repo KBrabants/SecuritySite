@@ -2,39 +2,40 @@
 @model SecuritySite.Pages.Account.New.FeaturesModel
 @{
 }
-
-<h1>@Model.account.locationName</h1>
+<div class="new-features-inputs">
+<h1 class="sub-sub-header">@Model.account.locationName</h1>
 @*Current Features*@
-<div>
-    <h2>Base Plan</h2>
+<div class="features-container">
+    <h2>Current Selection</h2>
     @foreach (var feature in Model.accountFeatures)
     {
         <div class="account-addon-card">
-            <p>@feature.FeatureName</p>
-            <p>@feature.Price</p>
+            <h3>@feature.FeatureName</h3>
+            <p>@feature.Description</p>
+            <p>$@(feature.Price) monthly</p>
         </div>
     }
-
 </div>
 
-<div>
+<div class="extra-features-container">
+    <h2>Additional Features</h2>
     <form asp-page="Features">
         <input type="hidden" asp-for="accountId" value="@Model.accountId" />
-        <input asp-for="test" />
         @foreach (var feature in Model.availableFeatures)
     {
-        <div>
-            <p>@feature.FeatureName</p>
+        <div class="addon-features">
+            <h3>@feature.FeatureName</h3>
             <p>@feature.Description</p>
-            <p>@feature.Price</p>
+            <p>$@(feature.Price) monthly</p>
             <select name="selectedFeatures" id="selectedFeatures">
                 <option value="">No</option>
-                <option value="@feature.Code">Yes</option>
+                <option value="@feature.Code">Include</option>
             </select>
         </div>
     }
-
+    @Html.AntiForgeryToken()
     <button type="submit">Review</button>
     </form>
 
+</div>
 </div>

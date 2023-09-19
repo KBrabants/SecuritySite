@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SecuritySite.Pages.Info
 {
-    public class GeneralModel : PageModel
+    public class TermsOfServiceModel : PageModel
     {
         public void OnGet()
         {

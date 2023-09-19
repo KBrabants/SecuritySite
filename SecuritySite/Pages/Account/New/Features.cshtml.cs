@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SecuritySite.Models;
@@ -5,6 +6,7 @@ using SecuritySite.Services;
 
 namespace SecuritySite.Pages.Account.New
 {
+        [Authorize]
     public class FeaturesModel : PageModel
     {
         public AccountQueryService _query {get;}
@@ -72,7 +74,7 @@ namespace SecuritySite.Pages.Account.New
             account.MonthlyCost = _query.GetMonitoredAccountPrice(account);
             _update.add_Features(account, selectedFeatures);
 
-            return RedirectToPage("Review", new { accountId = account.MonitoredAccountId});
+            return RedirectToPage("Review", new { accountId = account.MonitoredAccountId });
         }
     }
 }

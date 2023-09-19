@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -40,9 +41,13 @@ namespace SecuritySite.Pages.Account
 
             if(error == null)
             {
-                string token = ac_updates.GenerateEmailConfirmationToken(newUser).Result;
-                _email.EmailVerification(Input.emailAddress, token);
-                _email.EmailVoltic("New Account Created", $"{Input.firstName} created their account");
+                Task.Run(() =>
+                {
+                    string token = ac_updates.GenerateEmailConfirmationToken(newUser).Result;
+                    _email.EmailVerification(Input.emailAddress, token);
+                    _email.EmailVoltic("New Account Created", $"{Input.firstName} created their account");
+                });
+
              
                 return RedirectToPage("VerifyEmail");
             }

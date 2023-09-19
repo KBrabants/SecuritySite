@@ -18,13 +18,12 @@ namespace SecuritySite.Services
             _environment = environment;
         }
 
-        public Task EmailVoltic(string subjectEmail, string Body)
+        public async Task EmailVoltic(string subjectEmail, string Body)
         {
-            SendEmailAsync("support@voltic.tech", subjectEmail, Body);
+           await SendEmailAsync("support@voltic.tech", subjectEmail, Body);
 
-            return Task.CompletedTask;
         }
-        public Task EmailVerification(string emailTo, string verificationLink)
+        public async Task EmailVerification(string emailTo, string verificationLink)
         {
             verificationLink = HttpUtility.UrlEncode(verificationLink);
             string subject = "Voltic Email Verification";
@@ -32,75 +31,75 @@ namespace SecuritySite.Services
                 "<p>click the link below to verify your account.</p> <br/>" +
                 $"<a href=\"www.voltic.tech/account/login?token={verificationLink}&handler=Verification&email={emailTo}\">Voltic Verification <br/> www.voltic.tech/account/login?token={verificationLink}</a>" ;
 
-            SendEmailAsync(emailTo, subject, body);
+            await SendEmailAsync(emailTo, subject, body);
 
-            return Task.CompletedTask;
         }
         
-        public Task EmailCertificateRequest(string emailTo)
+        public async Task EmailCertificateRequest(string emailTo)
         {
             string subject = "Voltic Certificate Request Submittion Confirmation";
             string body = "<p>Your Certificate of alarm has been properly submitted and is under review.</p>";
 
-            SendEmailAsync(emailTo, subject, body);
-            return Task.CompletedTask;
+            await SendEmailAsync(emailTo, subject, body);
         }
 
-        public Task AccountInfoUpdated(string emailTo)
+        public async Task AccountInfoUpdated(string emailTo)
         {
             string subject = "Voltic Certificate Request Submittion Confirmation";
             string body = "<h1>Account info has been updated</h1> <br/>" +
                 "<p>Your account info has been updated. If this wasn't you, please contact us directly at 561-814-0042</p>";
 
-            SendEmailAsync(emailTo, subject, body);
-            return Task.CompletedTask;
+            await SendEmailAsync(emailTo, subject, body);
         }
-        public Task AccountDeleted(string emailTo)
+        public async Task AccountDeleted(string emailTo)
         {
             string subject = "Voltic Certificate Request Submittion Confirmation";
             string body = "<p>Your account info has been updated. If this wasn't you, please contact us directly at 561-814-0042</p>";
 
-            EmailVoltic("Account Deleted", "").Start();
-            return Task.CompletedTask;
+            await EmailVoltic("Account Deleted", "");
         }
-        public void SendEmailAsync(string email, string subject, string htmlMessage)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            try
+            await Task.Run(() =>
             {
-                var pickUpPathDirectory = Path.Combine(_environment.ContentRootPath, "Email");
-                var m_message = new MimeMessage();
-                m_message.To.Add(MailboxAddress.Parse(email));
-                m_message.From.Add(new MailboxAddress("Voltic Auto Email", "support@voltic.tech"));
-                m_message.Subject = subject;
-                m_message.Body = new TextPart("html")
-                {
-                    Text = htmlMessage
-                };
-
-               // SaveToPickupDirectory(m_message, pickUpPathDirectory).Wait();
-
-                SmtpClient smtpClient = new SmtpClient();
                 try
                 {
-                    smtpClient.Connect("smtp.office365.com", 587, SecureSocketOptions.StartTls);
-                    smtpClient.Authenticate("support@voltic.tech", "_GentileDolphins36912");
-                    smtpClient.Send(m_message);
+                    var pickUpPathDirectory = Path.Combine(_environment.ContentRootPath, "Email");
+                    var m_message = new MimeMessage();
+                    m_message.To.Add(MailboxAddress.Parse(email));
+                    m_message.From.Add(new MailboxAddress("Voltic Auto Email", "support@voltic.tech"));
+                    m_message.Subject = subject;
+                    m_message.Body = new TextPart("html")
+                    {
+                        Text = htmlMessage
+                    };
 
-        }
+                    // SaveToPickupDirectory(m_message, pickUpPathDirectory).Wait();
+
+                    SmtpClient smtpClient = new SmtpClient();
+                    try
+                    {
+                        smtpClient.Connect("smtp.office365.com", 587, SecureSocketOptions.StartTls);
+                        smtpClient.Authenticate("support@voltic.tech", "_GentileDolphins36912");
+                        smtpClient.Send(m_message);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //  log errors
+                    }
+                    smtpClient.Disconnect(true);
+                    smtpClient.Dispose();
+                }
                 catch (Exception ex)
                 {
-                   //  log errors
+                    //Console.WriteLine(ex.ToString()); Error logging
+                    Task.FromException(ex);
                 }
-                smtpClient.Disconnect(true);
-                smtpClient.Dispose();
+            });
         }
-            catch(Exception ex)
-            {
-                //Console.WriteLine(ex.ToString()); Error logging
-                Task.FromException(ex);
-            }
 
-}
+
         public static async Task SaveToPickupDirectory(MimeMessage message, string pickupDirectory)
         {
             do

@@ -5,6 +5,7 @@ namespace SecuritySite.Models
     public class CertificateRequest
     { 
         public int Id { get; set; }
+        public int AccountId { get; set; }
         public string InsuranceAgency { get; set; } = "";
         public string AgentName { get; set; } = "";
         public string AgentEmail { get; set; } = "";

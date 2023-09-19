@@ -1,16 +1,18 @@
 ﻿@page
 @model SecuritySite.Pages.ContactModel
 @{
+    ViewData["Title"] = "contact us";
 }
-<h1>Contact Us</h1>
-<p>Phone Number - 561-814-0042</p>
-<p>Email - support@@voltic.tech</p>
+<div class="container">
+    <p class="sub-header blue">Direct Contact</p>
+    <h2 class="center">Phone Number: 561-814-0042</h2>
+    <h2 class="center">Email: support@@voltic.tech</h2>
 
-<h1>Schedule an appointment</h1>
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/voltic-support/30min" style="min-width:320px;height:700px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end -->
+    <div class="top-container">
+        <p>Schedule an appointment</p>
+    </div>
+</div>
+
 <!-- Calendly inline widget begin -->
 <div class="calendly-inline-widget" data-url="https://calendly.com/voltic-support/technical-appointment-on-site" style="min-width:320px;height:700px;"></div>
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>

@@ -1,58 +1,66 @@
 ﻿@using SecuritySite.Models;
 @model AccountInfo
 <h1 class="left-margin blue">@Model.Name</h1>
-<form>
+<form asp-page="/Account/Index">
 
 <div class="left-padding overview-grid">
         @*General Info*@
 
        
         <div>
-            <p>Monitored Accounts: </p>
-        <p>@Model.Accounts</p> 
+            <br/>
+            <p>Monitored Accounts: @Model.Accounts</p>
         </div>
         <div>
             <p>Email:</p>
-            <input type="text" value="@Model.Email" />
+            <input type="text" value="@Model.Email" id="accountInfo_Email" name="accountInfo.Email" />
         </div>
 
         <div>
             <p>Phone Number: </p>
-            <input type="text" value="@Model.PhoneNumber" />
+            <input type="text" value="@Model.PhoneNumber" id="accountInfo_PhoneNumber" name="accountInfo.PhoneNumber" />
         </div>
         <div>
             <p>Billing address:</p>
-            <input type="text" value="@Model.Address" />
+            <input type="text" value="@Model.Address" id="accountInfo_Address" name="accountInfo.Address" />
         </div>
 
         <div>
             <p>City:</p>
-            <input type="text" value="@Model.City" />
+            <input type="text" value="@Model.City" id="accountInfo_City" name="accountInfo.City" />
         </div>
         <div>
             <p>County:</p>
-            <input type="text" value="@Model.County" />
+            <input type="text" value="@Model.County" id="accountInfo_County" name="accountInfo.County" />
         </div>
 
         <div>
             <p>Zipcode:</p>
-            <input type="text" value="@Model.ZipCode" />
+            <input type="text" value="@Model.ZipCode" id="accountInfo_ZipCode" name="accountInfo.ZipCode" />
         </div>
         <div>
             <p>State:</p>
-            <input type="text" value="@Model.State" />
+            <input type="text" value="@Model.State" id="accountInfo_State" name="accountInfo.State" />
         </div>
 
 
     </div>
     <p class="left-margin">Submit edits below</p>
-    <button class="left-margin submit" type="submit">Update</button>
+    <button class="left-margin submit" type="submit" asp-page-handler="AccountInfo">Update</button>
 
 </form>
 
-    <br/>
+
+
+
+
+
+
+
+
+@*     <br/>
 <div class="left-padding billing-summary">
-    @*Summarized Billing Info*@
+    @*Summarized Billing Info
         <p>Current Monthly Cost: $@(Model.MonthlyCost)</p>
         <p>Last Months Bill: $@(Model.LastBill)</p>
         <p>Next Billing Date: @Model.BillDate.ToShortDateString()</p>
@@ -64,7 +72,7 @@
     @if (Model.Invoice !=null)
     {
         <div class="invoice-grid">
-            @*Latest Invoice*@
+            @*Latest Invoice
             <div>
                 <p>Bill To: @(Model.Invoice.Name)</p>
                 <p>Accounts: @Model.Invoice.Accounts</p>
@@ -84,5 +92,5 @@
     }
 
 
-</div>
+</div> *@
 

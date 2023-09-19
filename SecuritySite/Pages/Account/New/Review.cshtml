@@ -3,7 +3,7 @@
 @{
 }
 
-
+<div class="new-location-inputs">
 <form asp-page="Review" method="post" class="new-location-form">
     @Html.AntiForgeryToken()
     <input type="hidden" asp-for="accountId" value="@Model.LocationInfo.MonitoredAccountId" />
@@ -69,13 +69,41 @@
 </form>
 
 <div>
-    <h2>Plans:</h2>
-    @foreach (var feature in Model.accountFeatures)
-    {
-        <div class="account-addon-card">
-            <p>@feature.FeatureName</p>
-            <p>@feature.Price</p>
+
+
+        <div class="new-location-radio">
+            <h1>Plans:</h1>
+            <div class="radio-grid">
+                @{
+                    float total = 0;
+                }
+                @foreach (var plan in Model.accountFeatures)
+                {
+                    total += plan.Price;
+
+                    <div>
+                        <p class="same-line">@plan.FeatureName</p>
+                    </div>
+
+                    <div>
+                        <br />
+                        @plan.Description
+                    </div>
+
+                    <div>
+                        <br />
+                        $@(plan.Price) Monthly
+                    </div>
+
+                }
+                <div></div>
+                <div><p style="float: right;">Total Monthly Cost: <span style="color: #1c5b79; font-weight:bold;">$@(total) monthly</span></p></div>
+                <div></div>
+            </div>
         </div>
-    }
-    <p>@(Model._query.GetMonitoredAccountPrice(Model.LocationInfo)) Monthly</p>
+
 </div>
+
+
+</div>
+

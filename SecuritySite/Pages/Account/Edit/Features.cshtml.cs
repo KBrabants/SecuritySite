@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SecuritySite.Models;
@@ -6,6 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SecuritySite.Pages.Account.edit
 {
+        [Authorize]
     public class FeaturesModel : PageModel
     {
         AccountUpdateService _update { get;set; }
@@ -21,6 +23,7 @@ namespace SecuritySite.Pages.Account.edit
         public MonitoredAccount account { get; set; }
         public List<AccountFeature> accountFeatures { get; set; }
         public List<AccountFeature> availableFeatures { get; set; }
+        public List<AccountFeature> basePlans { get;set; }
         public IActionResult OnGet()
         {
             try
@@ -39,12 +42,13 @@ namespace SecuritySite.Pages.Account.edit
             {
                 return RedirectToPage("error");
             }
-            else if (account.completed == true)
+            else if (account.completed != true)
             {
-                return RedirectToPage("/Account/Index");
+                return RedirectToPage("/Account/new/Features", new {accountId = this.accountId});
             }
             accountFeatures = _query.GetFeatures(account.Features);
-            availableFeatures = _query.GetFeatures(account.commercial, false).ToList();
+            availableFeatures = _query.FilterExisting( account.Features , _query.GetFeatures(account.commercial, false)).ToList();
+            basePlans = _query.FilterExisting(account.Features, _query.GetFeatures(true)).ToList();
 
             return Page();
         }
@@ -52,27 +56,9 @@ namespace SecuritySite.Pages.Account.edit
         public string test { get; set; }
         [BindProperty]
         public List<string> selectedFeatures { get; set; }
-        public IActionResult OnPost()
+        public void OnPost()
         {
-            if (_query.VerifyOwner(User, _query.GetMonitoredAccount(accountId)))
-            {
-                account = _query.GetMonitoredAccount(accountId);
-            }
-            if (account == null)
-            {
-                return RedirectToPage("error");
-            }
-            else if (account.completed == true)
-            {
-                return RedirectToPage("/Account/Index");
-            }
 
-            selectedFeatures.RemoveAll(x => x == null);
-            account.MonthlyCost = 0;
-            account.MonthlyCost = _query.GetMonitoredAccountPrice(account);
-            _update.add_Features(account, selectedFeatures);
-
-            return RedirectToPage("Review", new { accountId = account.MonitoredAccountId });
         }
 
         [BindProperty]
@@ -87,19 +73,24 @@ namespace SecuritySite.Pages.Account.edit
             {
                 return RedirectToPage("error");
             }
-            else if (account.completed == true)
+            else if (account.completed != true)
             {
-                return RedirectToPage("/Account/Index");
+                return RedirectToPage("/Account/new/Features", new { accountId = this.accountId });
             }
 
             AccountFeature feature = _query.GetFeature(RemoveCode);
             _update.remove_AccountFeature(account, feature);
+
+            accountFeatures = _query.GetFeatures(account.Features);
+            availableFeatures = _query.GetFeatures(account.commercial, false).ToList();
+            basePlans = _query.FilterExisting(account.Features, _query.GetFeatures(true)).ToList();
             return Page();
             
 
         }
         [BindProperty]
         public List<string> addFeatures { get; set; }
+        int x = 929;
         public IActionResult OnPostAddFeature()
         {
             if (_query.VerifyOwner(User, _query.GetMonitoredAccount(accountId)))
@@ -110,9 +101,9 @@ namespace SecuritySite.Pages.Account.edit
             {
                 return RedirectToPage("error");
             }
-            else if (account.completed == true)
+            else if (account.completed != true)
             {
-                return RedirectToPage("/Account/Index");
+                return RedirectToPage("/Account/new/Features", new { accountId = this.accountId });
             }
             List<AccountFeature> features = _query.GetFeatures(addFeatures).ToList();
 
@@ -121,12 +112,22 @@ namespace SecuritySite.Pages.Account.edit
                 if (feature == null) continue;
                 if (feature.BasePlan)
                 {
-                    var oldPlan = _query.GetFeature(RemoveCode);
+                    var oldPlan = _query.GetBasePlan(account);
                     _update.change_BasePlan(account, oldPlan, feature);
-                    addFeatures.Remove(feature.Code);
+
+                    accountFeatures = _query.GetFeatures(account.Features);
+                    availableFeatures = _query.FilterExisting(account.Features, _query.GetFeatures(account.commercial, false)).ToList();
+                    basePlans = _query.FilterExisting(account.Features, _query.GetFeatures(true)).ToList();
+
+
+                    return Page();
                 }
             }
             _update.add_Features(account, addFeatures);
+
+            accountFeatures = _query.GetFeatures(account.Features);
+            availableFeatures = _query.FilterExisting(account.Features, _query.GetFeatures(account.commercial, false)).ToList();
+            basePlans = _query.FilterExisting(account.Features, _query.GetFeatures(true)).ToList();
             return Page();
         }
     }

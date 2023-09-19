@@ -1,8 +1,16 @@
 ﻿@page
 @model SecuritySite.Pages.Account.VerifyEmailModel
 @{
+    ViewData["Title"] = "Verify Email";
 }
 
 <h1>Verify Account Email</h1>
 
 <p>You have been emailed, please verify your email and you will be able to login. Thank you!</p>
+
+<p>If you have not received an email, enter your email below and we will re-send the link.</p>
+
+<form asp-page="VerifyEmail">
+    <input type="text" asp-for="email"/>
+    <button type="submit">Send</button>
+</form>

@@ -3,64 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Management</title>
-    <link href="~/css/page.css" rel="stylesheet" />
+    <title>Voltic @ViewData["Title"]</title>
     <script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="~/css/account.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
+    <meta name="description" content="Voltic alarm monitoring in North Carolina, affordable and simplified service" />
+    <meta name="keywords" content="alarm monitoring, richlands monitoring, alarm system, qolsys, honeywell, alarm technician, voltic, voltic monitoring, affordable monitoring, alarm system" />
+    <link rel="icon" type="image/x-icon" href="/photos//uncompressed/shield-logo.png" />
 </head>
 <body>
 
-    <header class="account-header">
-        <a class="same-line">hamburger</a>
-        <p class="same-line branding-header">Voltic</p>
-        <p class="same-line header-description">Monitoring Account Portal </p>
-    </header>
 
-    <div class="side-bar">
-        <p>Services</p>
-        <ul>
-            <li data-id="0" onclick="viewPage()">Account Overview</li>
-            <li>Manage Locations</li>
-            <li>Request Certificate Of Alarm</li>
-            <li>Billing</li>
-            <li>Invoices</li>
-            <li>Settings</li>
-            <li>Notifications</li>
-            <li>About Voltic</li>
-            <li>Terms Of Service</li>
-        </ul>
-    </div>
+     @RenderBody()
 
-    <div class="main-container">
-        <main role="main" class="pb-3">
-
-            <div class="quick-nav-bar">
-                <p class="same-line quick-nav-title">Page Account Title</p>
-                <p class="same-line special-item">My Accounts</p>
-            </div>
-
-            <div class="partial-page-container">
-                @RenderBody()
-            </div>
-
-
-
-        </main>
-    </div>
-
-    @*    <footer class="border-top footer text-muted">
-    <div class="container">
-    &copy; 2023 - SecuritySite - <a asp-area="" asp-page="/Privacy">Privacy</a>
-    </div>
-    </footer>*@
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.Mapping;
 using SecuritySite.Data;
 using SecuritySite.Models;
 using System.Security.Policy;
@@ -15,10 +16,12 @@ namespace SecuritySite.Services
     {
         private AppDbContext _context { get; }
         private UserManager<ApplicationUser> _userManager { get; }
-        public AccountUpdateService(AppDbContext context, UserManager<ApplicationUser> userManager)
+        private AccountQueryService _query { get; }
+        public AccountUpdateService(AppDbContext context, UserManager<ApplicationUser> userManager, AccountQueryService query)
         {
             _context = context;
             _userManager = userManager;
+            _query = query;
         }
         public Task new_CertificateRequest(CertificateRequest certRequest, MonitoredAccount account)
         {
@@ -43,10 +46,15 @@ namespace SecuritySite.Services
 
                 var result = _userManager.CreateAsync(newAccount, password);
 
-                if (!result.IsCompleted)
-                {
-                    result.Wait();
-                }
+            try
+            {
+                result.Wait();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
                 if (result.Result.Succeeded)
                 {
                     _context.SaveChanges();
@@ -60,6 +68,24 @@ namespace SecuritySite.Services
                     //error logging
                 }
             
+
+        }
+        public void update_AccountInfo(string Id, AccountInfo info)
+        {
+            ApplicationUser user = _userManager.FindByIdAsync(Id).Result;
+
+            if(info.Completed())
+            {
+                user.Email = info.Email;
+                user.PhoneNumber = info.PhoneNumber;
+                user.Address = info.Address;
+                user.City = info.City;
+                user.County = info.County;
+                user.ZipCode = info.ZipCode;
+                user.State = info.State;
+                _context.SaveChanges();
+            }
+
 
         }
         public Task new_Location(MonitoredAccount newAccount)
@@ -95,24 +121,56 @@ namespace SecuritySite.Services
                     continue;
 
                 commaSeperate = commaSeperate + "," + feature;
+                account.accepted = false;
             }
             account.Features = account.Features + commaSeperate;
-
+            account.lastUpdated = DateTime.UtcNow;
+            update_AccountPrice(account);
             _context.SaveChanges();
         }
-        public void save_Changes() { 
+        public void update_AccountPrice(MonitoredAccount accountChanged) {
+            IEnumerable<AccountFeature> feats;
+            _query.GetAccountFeatures(accountChanged, out feats);
+
+            float cost = 0;
+            foreach (var feat in feats)
+            {
+                cost += feat.Price;
+            }
+
+            accountChanged.MonthlyCost = cost;
             _context.SaveChanges();
         }
         public void change_BasePlan(MonitoredAccount account, AccountFeature oldPlan, AccountFeature newPlan)
         {
-            account.Features.Replace(oldPlan.Code, newPlan.Code);
-            _context.SaveChanges(true);
-        }
+            if(account.commercial == newPlan.Commercial)
+            {
+                account.Features = account.Features.Replace(oldPlan.Code, newPlan.Code);
 
+            }
+            else
+            {
+                account.Features = newPlan.Code;
+                account.commercial = newPlan.Commercial;
+            }
+            account.accepted = false;
+            account.lastUpdated = DateTime.UtcNow;
+            update_AccountPrice(account);
+            _context.SaveChangesAsync().Wait();
+        }
         internal void remove_AccountFeature(MonitoredAccount monitoredAccount, AccountFeature feature)
         {
-            monitoredAccount.Features.Replace(feature.Code + ",", "");
-            _context.SaveChanges(true);
+            monitoredAccount.Features = monitoredAccount.Features.Replace($",{feature.Code}", "");
+            monitoredAccount.lastUpdated = DateTime.UtcNow;
+            monitoredAccount.accepted = false;
+            update_AccountPrice(monitoredAccount);
+            _context.SaveChanges();
         }
+        internal void save_Changes()
+        {
+            _context.SaveChanges();
+        }
+
+
     }
 }

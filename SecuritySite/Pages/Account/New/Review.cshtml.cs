@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Identity.Client;
@@ -8,6 +9,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SecuritySite.Pages.Account.New
 {
+        [Authorize]
     public class ReviewModel : PageModel
     {
         public AccountQueryService _query { get; set; }
@@ -53,10 +55,12 @@ namespace SecuritySite.Pages.Account.New
             else if (account.completed == true)
             {
                 return RedirectToPage("/Account/Index");
-            }
+            } 
 
             account.completed = true;
-            _emailing.EmailVoltic("New Location Created", $"{LocationInfo.MonitoredAccountId} was created");
+            account.accepted = false;
+            _emailing.EmailVoltic("New Location Created", $"{LocationInfo.AccountOwner} created {LocationInfo.locationName}");
+            
             _update.save_Changes();
 
             return RedirectToPage("/Account/Index");

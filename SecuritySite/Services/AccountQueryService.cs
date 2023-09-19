@@ -31,7 +31,7 @@ namespace SecuritySite.Services
         }
         public MonitoredAccount GetMonitoredAccount(int accountId)
         {
-            var account = _context.MonitoredAccounts.Where(a => a.MonitoredAccountId == accountId).First();
+            var account = _context.MonitoredAccounts.Where(a => a.MonitoredAccountId == accountId).FirstOrDefault();
                 
             if(account == null)
             {
@@ -54,6 +54,8 @@ namespace SecuritySite.Services
         {
             ApplicationUser user = _userManager.FindByIdAsync(Id).Result;
 
+            int accounts = _context.MonitoredAccounts.Where(a => a.AccountOwner == user.AccountGUID).Count();
+
             AccountInfo accountInfo = new AccountInfo()
             {
                 Address = user.Address,
@@ -64,11 +66,14 @@ namespace SecuritySite.Services
                 County = user.County,
                 ZipCode = user.ZipCode,
                 State = user.State,
+                Accounts = accounts,
             };
 
             return accountInfo;
 
         }
+
+
         public string GetAccountGuid(string Id)
         {
             ApplicationUser user = _userManager.FindByIdAsync(Id).Result;
@@ -81,9 +86,21 @@ namespace SecuritySite.Services
             var con = _context.MonitoredAccounts
                 .Where(a => a == monitoredAccount).FirstOrDefault();
 
-            IEnumerable<string> features = con.Features.Split(",");
+             var features = con.Features.Split(",");
 
             return features;
+
+        }
+        public void GetAccountFeatures(MonitoredAccount monitoredAccount, out IEnumerable<AccountFeature> Features)
+        {
+            List<AccountFeature> features = new List<AccountFeature>();
+
+            foreach(string feat in monitoredAccount.Features.Split(","))
+            {
+              features.Add(_context.AccountFeatures.Where(f => f.Code == feat).FirstOrDefault());
+            }
+
+            Features = features;
         }
         public IEnumerable<AccountFeature> GetFeatures()
         {
@@ -99,6 +116,7 @@ namespace SecuritySite.Services
         {
             return _context.AccountFeatures
                 .Where(f => f.BasePlan == basePlan)
+                .OrderBy(f => f.Id)
                 .AsEnumerable();
         }
         public IEnumerable<AccountFeature> GetFeatures(bool isCommercial, bool basePlan)
@@ -174,6 +192,18 @@ namespace SecuritySite.Services
             }
 
             return null;
+        }
+        public IEnumerable<AccountFeature> FilterExisting(string accountFeatures, IEnumerable<AccountFeature> features)
+        {
+            List<AccountFeature> filtered = new();
+            foreach (var feature in features)
+            {
+                if (!accountFeatures.Contains(feature.Code))
+                {
+                   filtered.Add(feature);
+                }
+            }
+            return filtered;
         }
     }
 }

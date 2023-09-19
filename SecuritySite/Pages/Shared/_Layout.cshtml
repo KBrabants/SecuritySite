@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Voltic Security</title>
+    <title>Voltic @ViewData["Title"]</title>
+    <meta name="description" content="Voltic alarm monitoring in North Carolina, affordable and simplified service" />
+    <meta name="keywords" content="alarm monitoring, richlands monitoring, alarm system, qolsys, honeywell, alarm technician, voltic, voltic monitoring, affordable monitoring, alarm system" />
     <link href="~/css/page.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/photos//uncompressed/shield-logo.png" />
     <script src="https://kit.fontawesome.com/01e6330f62.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -13,15 +16,16 @@
 
 
         <div class="same-line page-header sticky" >
-            <a style="text-decoration:none;" href="/">
+
+            <a class="voltic-top" style="text-decoration:none;" href="/">
             @*<object class="same-line"></object> Logo*@
-            <i class="blue fa-solid fa-shield-halved" style="font-size: 55px; margin-left: 4%;"></i>
+            <i class="blue fa-solid fa-shield-halved shield-icon"></i>
             <p style="margin-left: 0px;" class="same-line">Voltic</p>
             </a>
             <div class="header-link-spacing">
-                <a class="same-line" href="/#residential">Residential</a>
-                <a class="same-line" href="/#commercial">Commercial</a>
-                <a class="same-line" href="/about-us">About Us</a>
+                <a class="same-line" href="/#residential">Monitoring Plans</a>
+                <a class="same-line" href="/about">About Us</a>
+            <a class="same-line" href="/contact">Contact Us</a>
             @if (User.Identity.IsAuthenticated)
             {
                 <a class="same-line" href="/account">My Account</a>
@@ -44,15 +48,18 @@
         <div>
             <h1>Help</h1>
             <a href="/contact">Contact Us</a><br />
-            <a href="/account/appointment">Customer Service</a><br />
-            <a href="/info/maintenance">Maintain My System</a><br />
-            <a href="/info/monitorable">How We Work</a><br />
             <a href="/account/request/certificate">Certificate of Alarm</a><br />
+            @if (User.Identity.IsAuthenticated)
+            {
+                
+                <a href="/termsofservice">Terms And Conditions Monitoring</a>
+
+                <br />
+            }
         </div>
         <div>
             <h1>Information</h1>
             <a href="/about">About us</a><br />
-            <a href="/termsofservice">Terms Of Service</a><br />
             <a href="/contact">Contact us</a><br />
             <a href="/account">Customer Portal</a><br />
             <a></a>
@@ -61,13 +68,12 @@
             <h1>Want To Start?</h1>
             <a href="/account/create">Create Your Account</a><br/>
             <a href="/account">Add Monitored Location</a><br/>
-            <a href="/account/appointment">Schedule a technical appointment</a><br />
-            <a href="/help/maintenance">Maintain Your System</a><br />
+            <a href="/contact">Schedule Appointment</a><br />
         </div>
         <br/>
     </footer>
     <div class="blue-line">
-        <p>Voltic</p>
+        <p class="same-line">Voltic</p> @* <i class="fa-brands fa-facebook same-line"></i> <i class="fa-brands fa-linkedin same-line"></i> *@
     </div>
 
 @*    <footer class="border-top footer text-muted">

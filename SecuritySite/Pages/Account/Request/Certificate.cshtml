@@ -11,9 +11,7 @@
     <div>
         <h1>Certificate Of Alarm Request</h1>
         <p>
-            How do I receive a certificate of alarm for my insurance company?<br />
-
-            We try to make it as simple as possible. Please read the requirements, fill out the form, and email <span class="redish">support@@voltic.tech</span> your proof of insurance copy.
+            Please read the requirements, fill out the form, and email <span class="redish">support@@voltic.tech</span> your proof of insurance copy.
             <h2>Requirements</h2>
             <ol>
                 <li>Have an existing account with Voltic that is monitored</li>
@@ -28,13 +26,13 @@
     <div>
         <h2>Request Certificate</h2>
         <form asp-page="certificate" method="post" class="certificate-request">
-            <label asp-for="Input.Account">Select Location</label>
-            <select  asp-for="Input.Account"> 
-@*                @foreach ()
-                {*@
-                    <option value="AccountName">Account Name</option>
+            <label asp-for="Input.AccountId">Select Location</label>
+            <select  asp-for="Input.AccountId" required> 
+             @foreach (var account in Model.accounts)
+                {
+                    <option value="@account.MonitoredAccountId">@account.locationName</option>
 
-               @* }*@
+                }
             </select>
             <div class="form-group">
                 <label asp-for="Input.InsuranceAgency"></label>
