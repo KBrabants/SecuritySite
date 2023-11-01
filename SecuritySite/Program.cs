@@ -12,8 +12,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-   options.UseNpgsql("User Id=postgres;Host=192.168.1.142;Port=5432;Database=Voltic;Password=_GentileDolphins36912;Pooling=true; Maximum Pool Size=1024;");
-   //options.UseNpgsql("User Id=postgres;Host=25.58.113.230;Port=5432;Database=Voltic;Password=_GentileDolphins36912;Pooling=true; Maximum Pool Size=1024;");
+   options.UseNpgsql(connect to Db);
 });
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
